@@ -3,23 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Faire-Part – Raneda & Abdelmalek</title>
+<title>Faire-Part – Yasmine & Karim</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Alex+Brush&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
 
 <style>
   :root {
-    --bordeaux: #721c24;
-    --bordeaux-dark: #4a1018;
-    --bordeaux-light: #9b2a36;
-    --or: #c5a059;
-    --or-light: #dfc07a;
-    --or-pale: #f0ddb0;
-    --creme: #f8f4f0;
-    --creme-dark: #ede6de;
-    --text-dark: #2a1a1a;
-    --text-mid: #5a3a3a;
+    --kaki:        #5c6b3a;
+    --kaki-dark:   #3e4a27;
+    --kaki-deep:   #2b3319;
+    --sage:        #8fa67b;
+    --sage-light:  #b5c9a3;
+    --sage-pale:   #dae6d0;
+    --ecru:        #f4f0e6;
+    --ecru-dark:   #e8e2d4;
+    --or:          #c5a059;
+    --or-light:    #dfc07a;
+    --text-dark:   #2a2e1a;
+    --text-mid:    #4a5232;
+    --linen:       #f9f6ef;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -27,177 +30,211 @@
   html, body {
     width: 100%; height: 100%;
     overflow: hidden;
-    background: #1a0a0a;
-    font-family: 'Montserrat', sans-serif;
+    background: var(--kaki-deep);
+    font-family: 'Jost', sans-serif;
   }
 
   /* ── FOND SCÈNE ── */
   #scene {
     width: 100%; height: 100%;
     display: flex; align-items: center; justify-content: center;
-    background: radial-gradient(ellipse at center, #2d0d14 0%, #0e0407 100%);
+    background: radial-gradient(ellipse at 40% 45%, #3e4a27 0%, #1e2510 60%, #0f1208 100%);
     perspective: 1400px;
     position: relative;
     overflow: hidden;
   }
 
-  /* Particules dorées */
-  .particle {
-    position: absolute;
-    width: 2px; height: 2px;
-    background: var(--or);
-    border-radius: 50%;
-    opacity: 0;
-    animation: floatParticle linear infinite;
+  /* Grain texture overlay */
+  #scene::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.6;
+    z-index: 1;
   }
 
-  @keyframes floatParticle {
-    0%   { transform: translateY(100vh) translateX(0); opacity: 0; }
-    10%  { opacity: 0.6; }
-    90%  { opacity: 0.3; }
-    100% { transform: translateY(-10vh) translateX(30px); opacity: 0; }
+  /* Feuilles tombantes (particules) */
+  .leaf {
+    position: absolute;
+    font-size: 12px;
+    opacity: 0;
+    animation: fallLeaf linear infinite;
+    z-index: 2;
+    pointer-events: none;
+    filter: sepia(0.3);
+  }
+
+  @keyframes fallLeaf {
+    0%   { transform: translateY(-40px) rotate(0deg) translateX(0); opacity: 0; }
+    8%   { opacity: 0.55; }
+    88%  { opacity: 0.35; }
+    100% { transform: translateY(110vh) rotate(360deg) translateX(40px); opacity: 0; }
   }
 
   /* ── ENVELOPPE WRAPPER ── */
   #envelope-wrap {
     position: relative;
-    width: min(380px, 92vw);
+    width: min(420px, 94vw);
     transform-style: preserve-3d;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: transform 0.35s ease;
+    z-index: 10;
   }
-  #envelope-wrap:hover { transform: scale(1.015); }
+  #envelope-wrap:hover { transform: scale(1.012) translateY(-3px); }
 
-  /* ── ENVELOPPE BODY ── */
+  /* ── ENVELOPPE BODY ── naturelle, kraft organique ── */
   #envelope {
     position: relative;
     width: 100%;
-    padding-bottom: 68%;
-    background: linear-gradient(160deg, #8c2230 0%, #721c24 50%, #5a1520 100%);
-    border-radius: 4px;
+    padding-bottom: 65%;
+    background:
+      linear-gradient(160deg, #7a8b55 0%, #5c6b3a 45%, #3e4a27 100%);
+    border-radius: 6px 6px 4px 4px;
     box-shadow:
-      0 30px 80px rgba(0,0,0,0.7),
-      0 0 0 1px rgba(197,160,89,0.3),
-      inset 0 1px 0 rgba(197,160,89,0.2);
-    overflow: hidden;
+      0 40px 100px rgba(0,0,0,0.65),
+      0 8px 32px rgba(0,0,0,0.4),
+      0 0 0 1px rgba(181,201,163,0.25),
+      inset 0 1px 0 rgba(181,201,163,0.2),
+      inset 0 -1px 0 rgba(0,0,0,0.15);
+    overflow: visible;
   }
 
-  /* Arabesque texture sur l'enveloppe */
+  /* Texture lin/papier kraft */
   #envelope::before {
     content: '';
     position: absolute; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M30 5 Q40 15 30 25 Q20 15 30 5Z M5 30 Q15 20 25 30 Q15 40 5 30Z M55 30 Q45 20 35 30 Q45 40 55 30Z M30 55 Q20 45 30 35 Q40 45 30 55Z' fill='none' stroke='rgba(197,160,89,0.12)' stroke-width='0.8'/%3E%3C/svg%3E");
-    background-size: 60px 60px;
+    border-radius: 6px 6px 4px 4px;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M0 20 Q10 15 20 20 Q30 25 40 20M0 10 Q10 6 20 10 Q30 14 40 10M0 30 Q10 26 20 30 Q30 34 40 30' stroke='rgba(255,255,255,0.04)' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+    background-size: 40px 40px;
     pointer-events: none;
+    overflow: hidden;
   }
 
-  /* Lignes diagonales intérieures (effet enveloppe classique) */
+  /* Diagonales intérieures enveloppe */
   #envelope::after {
     content: '';
     position: absolute; inset: 0;
+    border-radius: 4px;
     background:
-      linear-gradient(135deg, transparent 48%, rgba(197,160,89,0.07) 49%, rgba(197,160,89,0.07) 51%, transparent 52%),
-      linear-gradient(225deg, transparent 48%, rgba(197,160,89,0.07) 49%, rgba(197,160,89,0.07) 51%, transparent 52%);
+      linear-gradient(135deg, transparent 47%, rgba(143,166,123,0.08) 48%, rgba(143,166,123,0.08) 52%, transparent 53%),
+      linear-gradient(225deg, transparent 47%, rgba(143,166,123,0.08) 48%, rgba(143,166,123,0.08) 52%, transparent 53%);
     pointer-events: none;
+    overflow: hidden;
+  }
+
+  /* Bordure décorative florale */
+  .env-border {
+    position: absolute;
+    inset: 0;
+    border-radius: 6px;
+    pointer-events: none;
+    overflow: hidden;
   }
 
   /* ── RABAT (FLAP) ── */
   #flap {
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 55%;
+    height: 56%;
     transform-origin: top center;
     transform-style: preserve-3d;
-    transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 10;
   }
 
   #flap-face {
     position: absolute; inset: 0;
-    background: linear-gradient(160deg, #9b2a36 0%, #721c24 100%);
-    clip-path: polygon(0 0, 100% 0, 50% 75%);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
+    background: linear-gradient(165deg, #8a9e62 0%, #6b7d47 50%, #4e5c32 100%);
+    clip-path: polygon(0 0, 100% 0, 50% 72%);
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.35);
   }
 
+  /* Veinures naturelles sur le rabat */
   #flap-face::before {
     content: '';
     position: absolute; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M30 5 Q40 15 30 25 Q20 15 30 5Z M5 30 Q15 20 25 30 Q15 40 5 30Z M55 30 Q45 20 35 30 Q45 40 55 30Z M30 55 Q20 45 30 35 Q40 45 30 55Z' fill='none' stroke='rgba(197,160,89,0.15)' stroke-width='0.8'/%3E%3C/svg%3E");
-    background-size: 60px 60px;
-    clip-path: polygon(0 0, 100% 0, 50% 75%);
+    clip-path: polygon(0 0, 100% 0, 50% 72%);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M40 0 Q42 20 40 40M20 10 Q35 25 40 40M60 10 Q45 25 40 40M10 30 Q25 35 40 40M70 30 Q55 35 40 40' stroke='rgba(181,201,163,0.12)' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+    background-size: 80px 80px;
   }
 
-  /* Ombre portée sous le rabat */
+  /* Éléments botaniques SVG sur le rabat */
+  #flap-botanical {
+    position: absolute; inset: 0;
+    clip-path: polygon(0 0, 100% 0, 50% 72%);
+    pointer-events: none;
+    overflow: hidden;
+  }
+
   #flap-shadow {
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 55%;
-    clip-path: polygon(0 0, 100% 0, 50% 75%);
-    background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.35) 100%);
+    height: 56%;
+    clip-path: polygon(0 0, 100% 0, 50% 72%);
+    background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.3) 100%);
     z-index: 9;
     pointer-events: none;
-    transition: opacity 0.9s ease;
+    transition: opacity 1s ease;
   }
 
-  /* ── SCEAU EN CIRE ── */
+  /* ── SCEAU VÉGÉTAL ── */
   #seal {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 72px; height: 72px;
+    width: 80px; height: 80px;
     z-index: 20;
     transition: all 0.5s ease;
   }
 
   #seal svg {
     width: 100%; height: 100%;
-    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.6));
-    animation: sealPulse 3s ease-in-out infinite;
+    filter: drop-shadow(0 6px 18px rgba(0,0,0,0.55));
+    animation: sealBreath 4s ease-in-out infinite;
   }
 
-  @keyframes sealPulse {
-    0%, 100% { filter: drop-shadow(0 4px 12px rgba(0,0,0,0.6)) drop-shadow(0 0 8px rgba(197,160,89,0.3)); }
-    50%       { filter: drop-shadow(0 4px 18px rgba(0,0,0,0.5)) drop-shadow(0 0 20px rgba(197,160,89,0.6)); }
+  @keyframes sealBreath {
+    0%, 100% { filter: drop-shadow(0 6px 18px rgba(0,0,0,0.55)) drop-shadow(0 0 10px rgba(197,160,89,0.25)); transform: scale(1); }
+    50%       { filter: drop-shadow(0 6px 22px rgba(0,0,0,0.45)) drop-shadow(0 0 24px rgba(197,160,89,0.5)); transform: scale(1.04); }
   }
 
   #seal .hint {
     position: absolute;
-    bottom: -22px;
+    bottom: -24px;
     left: 50%;
     transform: translateX(-50%);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 9px;
-    letter-spacing: 2.5px;
+    font-family: 'Jost', sans-serif;
+    font-size: 8px;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--or);
-    opacity: 0.75;
+    color: var(--sage-light);
+    opacity: 0.7;
     white-space: nowrap;
-    animation: hintBlink 2.5s ease-in-out infinite;
+    animation: hintBlink 2.8s ease-in-out infinite;
   }
 
   @keyframes hintBlink {
-    0%, 100% { opacity: 0.75; } 50% { opacity: 0.3; }
+    0%, 100% { opacity: 0.7; } 50% { opacity: 0.2; }
   }
 
   /* ── ÉTAT OUVERT ── */
   body.opened #flap {
-    transform: rotateX(-175deg);
+    transform: rotateX(-178deg);
   }
   body.opened #seal {
     opacity: 0;
     pointer-events: none;
-    transform: translate(-50%, -50%) scale(0.5);
+    transform: translate(-50%, -50%) scale(0.3) rotate(15deg);
   }
-  body.opened #envelope-wrap:hover {
-    transform: none;
-    cursor: default;
-  }
+  body.opened #envelope-wrap:hover { transform: none; cursor: default; }
   body.opened #envelope-wrap { cursor: default; }
 
-  /* ── CARTON D'INVITATION ── */
+  /* ── CARTON D'INVITATION (preview) ── */
   #card-wrap {
     position: absolute;
     bottom: 0; left: 0; right: 0;
@@ -208,566 +245,448 @@
   }
 
   #card {
-    width: 90%;
-    max-height: 40%;
-    background: var(--creme);
+    width: 88%;
+    max-height: 38%;
+    background: var(--ecru);
     border-radius: 3px 3px 0 0;
     overflow: hidden;
     transform: translateY(0);
     transition: none;
   }
 
-  /* Animation de sortie */
-  body.opened #card-wrap {
-    pointer-events: all;
+  body.opened #card-wrap { pointer-events: all; }
+
+  /* ── ANIMATION DES OISEAUX ── */
+  #birds-overlay {
+    position: fixed; inset: 0;
+    z-index: 90;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  body.birds-flying #birds-overlay { opacity: 1; }
+
+  .bird-svg {
+    position: absolute;
+    animation: flyBird ease-in-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes flyBird {
+    0%   { opacity: 0; transform: translateY(0px) translateX(0px) scale(0.6); }
+    15%  { opacity: 1; }
+    85%  { opacity: 0.8; }
+    100% { opacity: 0; transform: translateY(-110vh) translateX(var(--drift)) scale(0.35); }
   }
 
   /* ── INVITATION FULLSCREEN ── */
   #invitation {
-    position: fixed;
-    inset: 0;
-    background: var(--creme);
+    position: fixed; inset: 0;
+    background: var(--linen);
     z-index: 100;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     transform: translateY(100%);
-    transition: transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
     overscroll-behavior: contain;
   }
 
-  body.card-out #invitation {
-    transform: translateY(0);
-  }
+  body.card-out #invitation { transform: translateY(0); }
 
-  /* Intérieur de l'invitation */
   .inv-inner {
     min-height: 100%;
-    background: var(--creme);
+    background: var(--linen);
     position: relative;
   }
 
   /* ── HEADER INVITATION ── */
   .inv-header {
-    background: linear-gradient(160deg, var(--bordeaux-dark) 0%, var(--bordeaux) 60%, var(--bordeaux-light) 100%);
-    color: var(--or);
+    background: linear-gradient(165deg, var(--kaki-deep) 0%, var(--kaki-dark) 55%, var(--kaki) 100%);
+    color: var(--sage-light);
     text-align: center;
-    padding: 52px 24px 44px;
+    padding: 56px 28px 48px;
     position: relative;
     overflow: hidden;
   }
 
+  /* Motif botanique header */
   .inv-header::before {
     content: '';
     position: absolute; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M40 8 Q55 22 40 36 Q25 22 40 8Z M8 40 Q22 25 36 40 Q22 55 8 40Z M72 40 Q58 25 44 40 Q58 55 72 40Z M40 72 Q25 58 40 44 Q55 58 40 72Z M40 8 L72 40 L40 72 L8 40 Z' fill='none' stroke='rgba(197,160,89,0.1)' stroke-width='0.7'/%3E%3C/svg%3E");
-    background-size: 80px 80px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='rgba(181,201,163,0.07)' stroke-width='1'/%3E%3Ccircle cx='50' cy='50' r='20' fill='none' stroke='rgba(181,201,163,0.05)' stroke-width='1'/%3E%3Cpath d='M50 20 Q60 35 50 50 Q40 35 50 20Z M20 50 Q35 40 50 50 Q35 60 20 50Z M80 50 Q65 40 50 50 Q65 60 80 50Z M50 80 Q40 65 50 50 Q60 65 50 80Z' fill='rgba(181,201,163,0.06)' stroke='rgba(181,201,163,0.08)' stroke-width='0.5'/%3E%3C/svg%3E");
+    background-size: 100px 100px;
+  }
+
+  /* Branches décoratives */
+  .inv-header::after {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 10% 50%, rgba(143,166,123,0.12) 0%, transparent 55%),
+      radial-gradient(ellipse at 90% 50%, rgba(143,166,123,0.1) 0%, transparent 55%);
   }
 
   .inv-ornament-top {
-    font-size: 11px;
-    letter-spacing: 4px;
+    font-family: 'Jost', sans-serif;
+    font-size: 9px;
+    font-weight: 300;
+    letter-spacing: 5px;
     text-transform: uppercase;
-    color: var(--or-light);
-    margin-bottom: 16px;
+    color: var(--sage-light);
+    margin-bottom: 18px;
     position: relative;
-    opacity: 0.85;
+    z-index: 1;
+    opacity: 0.8;
   }
 
   .inv-ornament-top::before,
   .inv-ornament-top::after {
-    content: '—— ✦ ——';
-    margin: 0 8px;
-    font-size: 10px;
+    content: '— ✦ —';
+    margin: 0 10px;
+    font-size: 9px;
+    opacity: 0.7;
   }
 
   .inv-names {
     font-family: 'Alex Brush', cursive;
-    font-size: clamp(52px, 14vw, 78px);
-    color: var(--or-light);
-    line-height: 0.9;
+    font-size: clamp(54px, 15vw, 82px);
+    color: var(--sage-pale);
+    line-height: 0.88;
     position: relative;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
-    letter-spacing: -1px;
+    z-index: 1;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.25);
   }
 
   .inv-names .amp {
     display: block;
-    font-size: 0.55em;
+    font-size: 0.5em;
     color: var(--or);
-    opacity: 0.8;
-    line-height: 1.4;
+    opacity: 0.85;
+    line-height: 1.5;
   }
 
   .inv-subtitle {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 13px;
-    color: var(--or-pale);
-    margin-top: 18px;
+    font-size: 14px;
+    color: var(--sage-light);
+    margin-top: 20px;
     letter-spacing: 1px;
-    opacity: 0.85;
+    opacity: 0.8;
     position: relative;
+    z-index: 1;
   }
 
   /* ── DIVIDER ── */
   .divider {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 0 28px;
-    margin: 28px 0;
+    display: flex; align-items: center; gap: 14px;
+    padding: 0 28px; margin: 30px 0;
   }
   .divider::before,
   .divider::after {
     content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--or), transparent);
-    opacity: 0.5;
+    flex: 1; height: 1px;
+    background: linear-gradient(to right, transparent, var(--sage), transparent);
+    opacity: 0.45;
   }
-  .divider-icon {
-    color: var(--or);
-    font-size: 16px;
-    opacity: 0.8;
-  }
+  .divider-icon { color: var(--sage); font-size: 14px; opacity: 0.75; }
 
-  /* ── SECTIONS INVITATION ── */
+  /* ── SECTIONS ── */
   .inv-section {
-    padding: 32px 28px;
-    border-bottom: 1px solid rgba(197,160,89,0.15);
+    padding: 34px 28px;
+    border-bottom: 1px solid rgba(92,107,58,0.12);
   }
-
   .inv-section:last-child { border-bottom: none; }
 
   .section-label {
-    font-size: 9px;
-    letter-spacing: 3.5px;
+    font-size: 8px;
+    font-weight: 400;
+    letter-spacing: 4px;
     text-transform: uppercase;
-    color: var(--bordeaux);
+    color: var(--sage);
     margin-bottom: 14px;
-    opacity: 0.7;
+    opacity: 0.75;
   }
 
   .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    color: var(--bordeaux-dark);
-    margin-bottom: 16px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--kaki-dark);
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
   }
 
   /* ── TEXTE PRINCIPAL ── */
   .main-text {
     text-align: center;
-    padding: 36px 28px 28px;
-    background: var(--creme);
+    padding: 38px 28px 30px;
+    background: var(--linen);
   }
 
   .main-text p {
     font-size: 13.5px;
     color: var(--text-mid);
-    line-height: 1.85;
+    line-height: 1.9;
     font-weight: 300;
   }
 
   .main-text .highlight {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    color: var(--bordeaux);
+    color: var(--kaki);
     font-size: 15px;
+    font-weight: 500;
   }
 
   /* ── DATE BADGE ── */
   .date-badge {
-    margin: 24px auto;
+    margin: 28px auto;
     width: fit-content;
-    border: 1px solid rgba(197,160,89,0.4);
-    border-radius: 2px;
-    padding: 18px 36px;
+    border: 1px solid rgba(92,107,58,0.3);
+    border-radius: 3px;
+    padding: 20px 40px;
     text-align: center;
     position: relative;
-    background: linear-gradient(135deg, rgba(197,160,89,0.06), transparent);
+    background: linear-gradient(135deg, rgba(92,107,58,0.05), transparent);
   }
 
-  .date-badge::before,
-  .date-badge::after {
-    content: '✦';
-    position: absolute;
-    color: var(--or);
-    font-size: 10px;
-    opacity: 0.5;
-  }
-  .date-badge::before { top: 6px; left: 8px; }
-  .date-badge::after  { bottom: 6px; right: 8px; }
+  .date-badge::before { content: '✦'; position: absolute; top: 6px; left: 9px; color: var(--sage); font-size: 9px; opacity: 0.55; }
+  .date-badge::after  { content: '✦'; position: absolute; bottom: 6px; right: 9px; color: var(--sage); font-size: 9px; opacity: 0.55; }
 
   .date-day {
     font-family: 'Alex Brush', cursive;
-    font-size: 38px;
-    color: var(--bordeaux);
+    font-size: 40px;
+    color: var(--kaki);
     line-height: 1;
     display: block;
   }
 
   .date-full {
-    font-size: 11px;
-    letter-spacing: 2.5px;
+    font-size: 10px;
+    letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--text-mid);
-    margin-top: 6px;
+    margin-top: 7px;
     display: block;
+    font-weight: 400;
   }
 
   /* ── PROGRAMME ── */
-  .programme {
-    background: linear-gradient(135deg, #f3ece4 0%, var(--creme) 100%);
-  }
+  .programme { background: linear-gradient(135deg, #eff5e8 0%, var(--linen) 100%); }
 
-  .prog-list {
-    list-style: none;
-  }
+  .prog-list { list-style: none; }
 
   .prog-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    padding: 14px 0;
-    border-bottom: 1px solid rgba(197,160,89,0.12);
+    display: flex; align-items: flex-start;
+    gap: 16px; padding: 15px 0;
+    border-bottom: 1px solid rgba(92,107,58,0.1);
   }
   .prog-item:last-child { border-bottom: none; }
 
   .prog-time {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    color: var(--bordeaux);
+    font-size: 10px; font-weight: 400;
+    letter-spacing: 1.5px;
+    color: var(--sage);
     min-width: 52px;
-    padding-top: 2px;
+    padding-top: 3px;
   }
 
   .prog-dot {
     width: 8px; height: 8px;
     border-radius: 50%;
-    background: var(--or);
-    margin-top: 5px;
-    flex-shrink: 0;
-    box-shadow: 0 0 0 3px rgba(197,160,89,0.2);
+    background: var(--kaki);
+    margin-top: 5px; flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(92,107,58,0.18);
   }
 
-  .prog-desc {
-    flex: 1;
-  }
+  .prog-desc { flex: 1; }
   .prog-desc strong {
     display: block;
-    font-family: 'Playfair Display', serif;
-    font-size: 14px;
-    color: var(--bordeaux-dark);
-    margin-bottom: 2px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; font-weight: 500;
+    color: var(--kaki-dark); margin-bottom: 2px;
   }
-  .prog-desc span {
-    font-size: 12px;
-    color: var(--text-mid);
-    font-weight: 300;
-  }
+  .prog-desc span { font-size: 12px; color: var(--text-mid); font-weight: 300; }
 
   /* ── INFOS PRATIQUES ── */
-  .info-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
   .info-card {
     background: white;
-    border: 1px solid rgba(197,160,89,0.2);
-    border-radius: 4px;
-    padding: 16px 14px;
+    border: 1px solid rgba(92,107,58,0.15);
+    border-radius: 5px;
+    padding: 18px 14px;
     text-align: center;
+    box-shadow: 0 2px 8px rgba(62,74,39,0.06);
   }
 
-  .info-icon {
-    font-size: 22px;
-    display: block;
-    margin-bottom: 8px;
-  }
-
-  .info-label {
-    font-size: 9px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--bordeaux);
-    opacity: 0.7;
-    display: block;
-    margin-bottom: 4px;
-  }
-
-  .info-value {
-    font-family: 'Playfair Display', serif;
-    font-size: 13px;
-    color: var(--bordeaux-dark);
-    line-height: 1.35;
-  }
+  .info-icon { font-size: 22px; display: block; margin-bottom: 8px; }
+  .info-label { font-size: 8px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--sage); opacity: 0.8; display: block; margin-bottom: 5px; }
+  .info-value { font-family: 'Cormorant Garamond', serif; font-size: 14px; color: var(--kaki-dark); line-height: 1.4; }
 
   /* ── RSVP ── */
   .rsvp-section {
-    background: linear-gradient(160deg, var(--bordeaux-dark) 0%, var(--bordeaux) 100%);
-    padding: 40px 28px;
+    background: linear-gradient(160deg, var(--kaki-deep) 0%, var(--kaki-dark) 100%);
+    padding: 44px 28px;
     text-align: center;
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
   }
 
   .rsvp-section::before {
     content: '';
     position: absolute; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M30 5 Q40 15 30 25 Q20 15 30 5Z M5 30 Q15 20 25 30 Q15 40 5 30Z M55 30 Q45 20 35 30 Q45 40 55 30Z M30 55 Q20 45 30 35 Q40 45 30 55Z' fill='none' stroke='rgba(197,160,89,0.1)' stroke-width='0.8'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='18' fill='none' stroke='rgba(143,166,123,0.08)' stroke-width='1'/%3E%3Cpath d='M30 12 Q35 21 30 30 Q25 21 30 12Z M12 30 Q21 25 30 30 Q21 35 12 30Z M48 30 Q39 25 30 30 Q39 35 48 30Z M30 48 Q25 39 30 30 Q35 39 30 48Z' fill='rgba(143,166,123,0.05)' stroke='rgba(143,166,123,0.08)' stroke-width='0.5'/%3E%3C/svg%3E");
     background-size: 60px 60px;
     pointer-events: none;
   }
 
   .rsvp-title {
     font-family: 'Alex Brush', cursive;
-    font-size: 42px;
-    color: var(--or-light);
-    margin-bottom: 6px;
-    position: relative;
+    font-size: 46px; color: var(--sage-pale);
+    margin-bottom: 8px; position: relative;
   }
 
   .rsvp-subtitle {
-    font-size: 11px;
-    letter-spacing: 2.5px;
+    font-size: 10px; letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--or);
-    opacity: 0.75;
-    margin-bottom: 28px;
-    position: relative;
+    color: var(--sage-light); opacity: 0.7;
+    margin-bottom: 30px; position: relative;
   }
 
-  .rsvp-form {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    position: relative;
-  }
+  .rsvp-form { display: flex; flex-direction: column; gap: 14px; position: relative; }
 
   .rsvp-input {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(197,160,89,0.3);
-    border-radius: 3px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(143,166,123,0.3);
+    border-radius: 4px;
     padding: 14px 18px;
-    color: var(--creme);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
-    font-weight: 300;
+    color: var(--sage-pale);
+    font-family: 'Jost', sans-serif;
+    font-size: 13px; font-weight: 300;
     outline: none;
     transition: border-color 0.3s, background 0.3s;
     width: 100%;
   }
 
-  .rsvp-input::placeholder { color: rgba(248,244,240,0.4); }
-  .rsvp-input:focus {
-    border-color: var(--or);
-    background: rgba(255,255,255,0.12);
-  }
+  .rsvp-input::placeholder { color: rgba(218,230,208,0.35); }
+  .rsvp-input:focus { border-color: var(--sage); background: rgba(255,255,255,0.11); }
 
   .rsvp-select {
     appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c5a059' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238fa67b' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 16px center;
     cursor: pointer;
   }
 
-  .rsvp-select option { background: var(--bordeaux-dark); color: var(--creme); }
+  .rsvp-select option { background: var(--kaki-dark); color: var(--sage-pale); }
 
   .rsvp-btn {
-    background: linear-gradient(135deg, var(--or) 0%, var(--or-light) 100%);
-    color: var(--bordeaux-dark);
-    border: none;
-    border-radius: 3px;
+    background: linear-gradient(135deg, var(--kaki) 0%, var(--sage) 100%);
+    color: var(--ecru);
+    border: none; border-radius: 4px;
     padding: 16px 28px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
+    font-family: 'Jost', sans-serif;
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 3px; text-transform: uppercase;
     cursor: pointer;
     transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
   }
 
-  .rsvp-btn::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: white;
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-
-  .rsvp-btn:hover::after { opacity: 0.15; }
+  .rsvp-btn::after { content: ''; position: absolute; inset: 0; background: white; opacity: 0; transition: opacity 0.2s; }
+  .rsvp-btn:hover::after { opacity: 0.12; }
   .rsvp-btn:active { transform: scale(0.98); }
 
-  .rsvp-success {
-    display: none;
-    text-align: center;
-    padding: 20px;
-    position: relative;
-  }
-  .rsvp-success .check { font-size: 40px; display: block; margin-bottom: 10px; }
-  .rsvp-success p {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    color: var(--or-light);
-    font-size: 16px;
-  }
+  .rsvp-success { display: none; text-align: center; padding: 20px; position: relative; }
+  .rsvp-success .check { font-size: 40px; display: block; margin-bottom: 12px; }
+  .rsvp-success p { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--sage-light); font-size: 17px; line-height: 1.6; }
 
   /* ── FOOTER ── */
-  .inv-footer {
-    background: var(--bordeaux-dark);
-    padding: 32px 28px;
-    text-align: center;
-  }
-
-  .footer-names {
-    font-family: 'Alex Brush', cursive;
-    font-size: 32px;
-    color: var(--or);
-    margin-bottom: 8px;
-  }
-
-  .footer-sub {
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: rgba(197,160,89,0.5);
-  }
+  .inv-footer { background: var(--kaki-deep); padding: 36px 28px; text-align: center; }
+  .footer-names { font-family: 'Alex Brush', cursive; font-size: 34px; color: var(--sage-light); margin-bottom: 10px; }
+  .footer-sub { font-size: 9px; letter-spacing: 3.5px; text-transform: uppercase; color: rgba(143,166,123,0.45); }
 
   /* ── SCROLL HINT ── */
-  .scroll-hint {
-    text-align: center;
-    padding: 16px;
-    background: var(--creme);
-    animation: bounce 2s ease-in-out infinite;
-  }
-
-  .scroll-hint span {
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--bordeaux);
-    opacity: 0.6;
-  }
-
-  .scroll-arrow {
-    display: block;
-    font-size: 18px;
-    color: var(--or);
-    opacity: 0.6;
-    margin-top: 4px;
-  }
+  .scroll-hint { text-align: center; padding: 16px; background: var(--linen); animation: bounce 2.2s ease-in-out infinite; }
+  .scroll-hint span { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--sage); opacity: 0.55; }
+  .scroll-arrow { display: block; font-size: 18px; color: var(--kaki); opacity: 0.5; margin-top: 5px; }
 
   @keyframes bounce {
     0%, 100% { transform: translateY(0); }
     50%       { transform: translateY(-4px); }
   }
 
-  /* ── ZELLIGE BORDER ── */
+  /* ── FRISE ZELLIGE VERTE ── */
   .zellige-border {
-    height: 8px;
+    height: 7px;
     background: repeating-linear-gradient(
       90deg,
-      var(--bordeaux) 0px,
-      var(--bordeaux) 10px,
-      var(--or) 10px,
-      var(--or) 14px,
-      var(--bordeaux) 14px,
-      var(--bordeaux) 24px,
-      var(--bordeaux-dark) 24px,
-      var(--bordeaux-dark) 28px,
-      var(--or) 28px,
-      var(--or) 32px,
-      var(--bordeaux-dark) 32px,
-      var(--bordeaux-dark) 40px
+      var(--kaki)      0px,
+      var(--kaki)      10px,
+      var(--sage)      10px,
+      var(--sage)      14px,
+      var(--kaki)      14px,
+      var(--kaki)      24px,
+      var(--kaki-dark) 24px,
+      var(--kaki-dark) 28px,
+      var(--sage-light) 28px,
+      var(--sage-light) 32px,
+      var(--kaki-dark) 32px,
+      var(--kaki-dark) 40px
     );
   }
 
   /* ── CLOSE BTN ── */
   #close-btn {
-    position: fixed;
-    top: 16px; right: 16px;
-    z-index: 200;
-    width: 36px; height: 36px;
-    background: rgba(114,28,36,0.85);
-    border: 1px solid rgba(197,160,89,0.4);
+    position: fixed; top: 16px; right: 16px;
+    z-index: 200; width: 38px; height: 38px;
+    background: rgba(43,51,25,0.88);
+    border: 1px solid rgba(143,166,123,0.4);
     border-radius: 50%;
-    color: var(--or);
-    font-size: 16px;
+    color: var(--sage-light);
+    font-size: 15px;
     display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    opacity: 0;
-    pointer-events: none;
+    cursor: pointer; opacity: 0; pointer-events: none;
     transition: opacity 0.4s ease;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(6px);
   }
 
-  body.card-out #close-btn {
-    opacity: 1;
-    pointer-events: all;
-  }
+  body.card-out #close-btn { opacity: 1; pointer-events: all; }
 
-  /* ── ANIMATIONS ENTRÉE INVITATION ── */
+  /* ── FADE IN UP ── */
   .fade-in-up {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
+    opacity: 0; transform: translateY(22px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
   }
   body.card-out .fade-in-up { opacity: 1; transform: translateY(0); }
-  body.card-out .fade-in-up:nth-child(1) { transition-delay: 0.3s; }
-  body.card-out .fade-in-up:nth-child(2) { transition-delay: 0.5s; }
-  body.card-out .fade-in-up:nth-child(3) { transition-delay: 0.7s; }
-  body.card-out .fade-in-up:nth-child(4) { transition-delay: 0.9s; }
-  body.card-out .fade-in-up:nth-child(5) { transition-delay: 1.1s; }
+  body.card-out .fade-in-up:nth-child(1) { transition-delay: 0.2s; }
+  body.card-out .fade-in-up:nth-child(2) { transition-delay: 0.4s; }
+  body.card-out .fade-in-up:nth-child(3) { transition-delay: 0.65s; }
+  body.card-out .fade-in-up:nth-child(4) { transition-delay: 0.85s; }
+  body.card-out .fade-in-up:nth-child(5) { transition-delay: 1.05s; }
 
-  /* ── LOADING SPINNER ── */
-  #rsvp-spinner {
-    display: none;
-    width: 20px; height: 20px;
-    border: 2px solid rgba(197,160,89,0.3);
-    border-top-color: var(--or);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    margin: 0 auto;
-  }
+  /* ── SPINNER ── */
+  #rsvp-spinner { display: none; width: 20px; height: 20px; border: 2px solid rgba(143,166,123,0.3); border-top-color: var(--sage); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* ── MAP PLACEHOLDER ── */
+  /* ── MAP ── */
   .map-placeholder {
-    background: linear-gradient(135deg, #f0e8de, #e8ddd2);
-    border: 1px solid rgba(197,160,89,0.2);
-    border-radius: 4px;
-    padding: 28px;
-    text-align: center;
+    background: linear-gradient(135deg, #edf3e5, var(--linen));
+    border: 1px solid rgba(92,107,58,0.18);
+    border-radius: 5px; padding: 30px; text-align: center;
   }
   .map-icon { font-size: 32px; margin-bottom: 10px; display: block; }
-  .map-address {
-    font-family: 'Playfair Display', serif;
-    font-size: 15px;
-    color: var(--bordeaux-dark);
-    line-height: 1.5;
-    margin-bottom: 14px;
-  }
+  .map-address { font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--kaki-dark); line-height: 1.5; margin-bottom: 16px; }
   .map-btn {
-    display: inline-block;
-    padding: 10px 24px;
-    border: 1px solid var(--bordeaux);
-    color: var(--bordeaux);
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 2px;
-    transition: all 0.3s;
+    display: inline-block; padding: 10px 26px;
+    border: 1px solid var(--kaki); color: var(--kaki);
+    font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase;
+    text-decoration: none; border-radius: 3px; transition: all 0.3s; font-family: 'Jost';
   }
-  .map-btn:hover { background: var(--bordeaux); color: var(--creme); }
+  .map-btn:hover { background: var(--kaki); color: var(--ecru); }
 </style>
 </head>
 <body>
@@ -775,46 +694,125 @@
 <!-- SCÈNE ENVELOPPE -->
 <div id="scene">
 
-  <!-- Particules -->
-  <!-- Générées par JS -->
-
   <div id="envelope-wrap" onclick="openEnvelope()">
 
     <div id="envelope">
+      <!-- Éléments botaniques décoratifs SVG sur l'enveloppe -->
+      <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;overflow:hidden;border-radius:6px" viewBox="0 0 420 273" xmlns="http://www.w3.org/2000/svg">
+        <!-- Branches coin gauche -->
+        <g opacity="0.35" transform="translate(10,20)">
+          <line x1="0" y1="80" x2="55" y2="40" stroke="#b5c9a3" stroke-width="1.2"/>
+          <line x1="55" y1="40" x2="90" y2="18" stroke="#b5c9a3" stroke-width="1"/>
+          <ellipse cx="20" cy="68" rx="9" ry="5" fill="#8fa67b" transform="rotate(-25,20,68)"/>
+          <ellipse cx="38" cy="54" rx="8" ry="4.5" fill="#a0b88a" transform="rotate(-40,38,54)"/>
+          <ellipse cx="58" cy="40" rx="8" ry="4" fill="#8fa67b" transform="rotate(-50,58,40)"/>
+          <ellipse cx="76" cy="28" rx="7" ry="3.5" fill="#a0b88a" transform="rotate(-55,76,28)"/>
+          <ellipse cx="95" cy="18" rx="6" ry="3" fill="#8fa67b" transform="rotate(-60,95,18)"/>
+          <line x1="30" y1="56" x2="12" y2="45" stroke="#b5c9a3" stroke-width="0.8"/>
+          <ellipse cx="8" cy="42" rx="7" ry="3.5" fill="#8fa67b" transform="rotate(-70,8,42)"/>
+          <line x1="50" y1="44" x2="36" y2="30" stroke="#b5c9a3" stroke-width="0.8"/>
+          <ellipse cx="32" cy="26" rx="7" ry="3.5" fill="#a0b88a" transform="rotate(-60,32,26)"/>
+        </g>
+        <!-- Branches coin droit -->
+        <g opacity="0.35" transform="translate(280,20) scale(-1,1) translate(-140,0)">
+          <line x1="0" y1="80" x2="55" y2="40" stroke="#b5c9a3" stroke-width="1.2"/>
+          <line x1="55" y1="40" x2="90" y2="18" stroke="#b5c9a3" stroke-width="1"/>
+          <ellipse cx="20" cy="68" rx="9" ry="5" fill="#8fa67b" transform="rotate(-25,20,68)"/>
+          <ellipse cx="38" cy="54" rx="8" ry="4.5" fill="#a0b88a" transform="rotate(-40,38,54)"/>
+          <ellipse cx="58" cy="40" rx="8" ry="4" fill="#8fa67b" transform="rotate(-50,58,40)"/>
+          <ellipse cx="76" cy="28" rx="7" ry="3.5" fill="#a0b88a" transform="rotate(-55,76,28)"/>
+          <ellipse cx="95" cy="18" rx="6" ry="3" fill="#8fa67b" transform="rotate(-60,95,18)"/>
+          <line x1="30" y1="56" x2="12" y2="45" stroke="#b5c9a3" stroke-width="0.8"/>
+          <ellipse cx="8" cy="42" rx="7" ry="3.5" fill="#8fa67b" transform="rotate(-70,8,42)"/>
+        </g>
+        <!-- Brindilles bas gauche -->
+        <g opacity="0.28" transform="translate(0,180)">
+          <line x1="0" y1="60" x2="40" y2="30" stroke="#b5c9a3" stroke-width="1"/>
+          <ellipse cx="14" cy="50" rx="7" ry="3.5" fill="#8fa67b" transform="rotate(-30,14,50)"/>
+          <ellipse cx="28" cy="40" rx="7" ry="3.5" fill="#a0b88a" transform="rotate(-45,28,40)"/>
+          <ellipse cx="42" cy="28" rx="6" ry="3" fill="#8fa67b" transform="rotate(-50,42,28)"/>
+        </g>
+        <!-- Brindilles bas droite -->
+        <g opacity="0.28" transform="translate(340,180) scale(-1,1) translate(-80,0)">
+          <line x1="0" y1="60" x2="40" y2="30" stroke="#b5c9a3" stroke-width="1"/>
+          <ellipse cx="14" cy="50" rx="7" ry="3.5" fill="#8fa67b" transform="rotate(-30,14,50)"/>
+          <ellipse cx="28" cy="40" rx="7" ry="3.5" fill="#a0b88a" transform="rotate(-45,28,40)"/>
+          <ellipse cx="42" cy="28" rx="6" ry="3" fill="#8fa67b" transform="rotate(-50,42,28)"/>
+        </g>
+        <!-- Petites baies -->
+        <circle cx="108" cy="62" r="3.5" fill="#c5a059" opacity="0.5"/>
+        <circle cx="118" cy="56" r="2.5" fill="#dfc07a" opacity="0.4"/>
+        <circle cx="102" cy="72" r="2.5" fill="#c5a059" opacity="0.4"/>
+        <circle cx="312" cy="62" r="3.5" fill="#c5a059" opacity="0.5"/>
+        <circle cx="302" cy="56" r="2.5" fill="#dfc07a" opacity="0.4"/>
+        <circle cx="318" cy="72" r="2.5" fill="#c5a059" opacity="0.4"/>
+      </svg>
+
       <!-- Rabat -->
       <div id="flap">
-        <div id="flap-face"></div>
+        <div id="flap-face">
+          <!-- Motif botanique sur rabat -->
+          <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;clip-path:polygon(0 0,100% 0,50% 72%)" viewBox="0 0 420 240" xmlns="http://www.w3.org/2000/svg">
+            <g opacity="0.25" transform="translate(60,10)">
+              <line x1="0" y1="60" x2="50" y2="25" stroke="#dae6d0" stroke-width="1"/>
+              <ellipse cx="18" cy="48" rx="10" ry="5" fill="#b5c9a3" transform="rotate(-30,18,48)"/>
+              <ellipse cx="36" cy="35" rx="9" ry="4.5" fill="#c5d6b0" transform="rotate(-45,36,35)"/>
+              <ellipse cx="54" cy="22" rx="8" ry="4" fill="#b5c9a3" transform="rotate(-55,54,22)"/>
+            </g>
+            <g opacity="0.25" transform="translate(300,10) scale(-1,1) translate(-100,0)">
+              <line x1="0" y1="60" x2="50" y2="25" stroke="#dae6d0" stroke-width="1"/>
+              <ellipse cx="18" cy="48" rx="10" ry="5" fill="#b5c9a3" transform="rotate(-30,18,48)"/>
+              <ellipse cx="36" cy="35" rx="9" ry="4.5" fill="#c5d6b0" transform="rotate(-45,36,35)"/>
+              <ellipse cx="54" cy="22" rx="8" ry="4" fill="#b5c9a3" transform="rotate(-55,54,22)"/>
+            </g>
+          </svg>
+        </div>
       </div>
       <div id="flap-shadow"></div>
 
-      <!-- Contenu visible (mini aperçu) -->
+      <!-- Preview carte -->
       <div id="card-wrap">
         <div id="card"></div>
       </div>
     </div>
 
-    <!-- Sceau -->
+    <!-- Sceau végétal -->
     <div id="seal">
       <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <!-- Fond cire -->
-        <circle cx="50" cy="50" r="46" fill="#8b1a1a"/>
-        <circle cx="50" cy="50" r="46" fill="url(#waxGrad)"/>
-        <!-- Texture cire -->
-        <circle cx="50" cy="50" r="46" fill="none" stroke="#a02020" stroke-width="2" opacity="0.4"/>
-        <!-- Étoile / rosette centrale -->
-        <polygon points="50,14 53.5,40 66,18 56,42 78,32 58,48 82,50 58,52 78,68 56,58 66,82 53.5,60 50,86 46.5,60 34,82 44,58 22,68 42,52 18,50 42,48 22,32 44,42 34,18 46.5,40" fill="#c5a059" opacity="0.9"/>
-        <!-- Monogramme -->
-        <text x="50" y="57" font-family="serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#f0ddb0" letter-spacing="1">Y&amp;K</text>
-        <!-- Cercle intérieur -->
-        <circle cx="50" cy="50" r="40" fill="none" stroke="#c5a059" stroke-width="0.8" opacity="0.5"/>
-        <circle cx="50" cy="50" r="36" fill="none" stroke="#c5a059" stroke-width="0.4" opacity="0.4"/>
-        <!-- Gradient cire -->
         <defs>
-          <radialGradient id="waxGrad" cx="40%" cy="35%">
-            <stop offset="0%" stop-color="#b52020" stop-opacity="0.6"/>
-            <stop offset="60%" stop-color="transparent" stop-opacity="0"/>
+          <radialGradient id="sealGrad" cx="38%" cy="32%">
+            <stop offset="0%" stop-color="#8fa67b" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
           </radialGradient>
         </defs>
+        <!-- Fond cire vert -->
+        <circle cx="50" cy="50" r="47" fill="#3e4a27"/>
+        <circle cx="50" cy="50" r="47" fill="url(#sealGrad)"/>
+        <circle cx="50" cy="50" r="47" fill="none" stroke="#5c6b3a" stroke-width="2" opacity="0.5"/>
+        <!-- Couronne de feuilles -->
+        <g opacity="0.85">
+          <!-- feuilles autour -->
+          <ellipse cx="50" cy="16" rx="4.5" ry="9" fill="#8fa67b" transform="rotate(0,50,50) translate(0,0)"/>
+          <ellipse cx="50" cy="16" rx="4.5" ry="9" fill="#8fa67b" transform="rotate(30,50,50)"/>
+          <ellipse cx="50" cy="16" rx="4.5" ry="9" fill="#8fa67b" transform="rotate(60,50,50)"/>
+          <ellipse cx="50" cy="16" rx="4.5" ry="9" fill="#8fa67b" transform="rotate(90,50,50)"/>
+          <ellipse cx="50" cy="16" rx="4.5" ry="9" fill="#8fa67b" transform="rotate(120,50,50)"/>
+          <ellipse cx="50" cy="16" rx="4.5" ry="9" fill="#8fa67b" transform="rotate(150,50,50)"/>
+          <ellipse cx="50" cy="16" rx="4.5" ry="9" fill="#8fa67b" transform="rotate(180,50,50)"/>
+          <ellipse cx="50" cy="16" rx="4.5" ry="9" fill="#8fa67b" transform="rotate(210,50,50)"/>
+          <ellipse cx="50" cy="16" rx="4.5" ry="9" fill="#8fa67b" transform="rotate(240,50,50)"/>
+          <ellipse cx="50" cy="16" rx="4.5" ry="9" fill="#8fa67b" transform="rotate(270,50,50)"/>
+          <ellipse cx="50" cy="16" rx="4.5" ry="9" fill="#8fa67b" transform="rotate(300,50,50)"/>
+          <ellipse cx="50" cy="16" rx="4.5" ry="9" fill="#8fa67b" transform="rotate(330,50,50)"/>
+        </g>
+        <!-- Cercle intérieur -->
+        <circle cx="50" cy="50" r="30" fill="#2b3319"/>
+        <circle cx="50" cy="50" r="30" fill="url(#sealGrad)"/>
+        <circle cx="50" cy="50" r="28" fill="none" stroke="#8fa67b" stroke-width="0.8" opacity="0.6"/>
+        <!-- Monogramme -->
+        <text x="50" y="55" font-family="Georgia, serif" font-size="18" font-weight="400" text-anchor="middle" fill="#dae6d0" letter-spacing="2" opacity="0.95">Y&amp;K</text>
+        <!-- Petite tige centrale -->
+        <line x1="50" y1="63" x2="50" y2="70" stroke="#8fa67b" stroke-width="0.8" opacity="0.5"/>
       </svg>
       <span class="hint">Ouvrir</span>
     </div>
@@ -823,6 +821,9 @@
 
 </div><!-- /scene -->
 
+<!-- OVERLAY OISEAUX -->
+<div id="birds-overlay"></div>
+
 <!-- BOUTON FERMER -->
 <button id="close-btn" onclick="closeInvitation()">✕</button>
 
@@ -830,21 +831,18 @@
 <div id="invitation">
   <div class="inv-inner">
 
-    <!-- Header -->
     <div class="inv-header fade-in-up">
       <div class="inv-ornament-top">Mariage</div>
       <div class="inv-names">
-        Raneda
+        Yasmine
         <span class="amp">&amp;</span>
-        Abdelmalek
+        Karim
       </div>
       <div class="inv-subtitle">Vous invitent à partager leur bonheur</div>
     </div>
 
-    <!-- Zellige border -->
     <div class="zellige-border"></div>
 
-    <!-- Texte principal -->
     <div class="main-text fade-in-up">
       <p>
         C'est avec une joie immense que nos deux familles, <span class="highlight">algérienne et tunisienne</span>, vous convient à célébrer l'union de leurs enfants dans la chaleur et la tradition.
@@ -858,7 +856,6 @@
 
     <div class="divider"><span class="divider-icon">✦</span></div>
 
-    <!-- Programme -->
     <div class="inv-section programme fade-in-up">
       <div class="section-label">Déroulé de la soirée</div>
       <div class="section-title">Programme</div>
@@ -869,6 +866,14 @@
           <div class="prog-desc">
             <strong>Accueil des invités</strong>
             <span>Cocktail de bienvenue &amp; musique orientale</span>
+          </div>
+        </li>
+        <li class="prog-item">
+          <span class="prog-time">19h30</span>
+          <span class="prog-dot"></span>
+          <div class="prog-desc">
+            <strong>Cortège des mariés</strong>
+            <span>Entrée traditionnelle &amp; bénédictions</span>
           </div>
         </li>
         <li class="prog-item">
@@ -900,7 +905,6 @@
 
     <div class="divider"><span class="divider-icon">✦</span></div>
 
-    <!-- Infos pratiques -->
     <div class="inv-section fade-in-up">
       <div class="section-label">À savoir</div>
       <div class="section-title">Informations pratiques</div>
@@ -930,7 +934,6 @@
 
     <div class="divider"><span class="divider-icon">✦</span></div>
 
-    <!-- Plan -->
     <div class="inv-section fade-in-up">
       <div class="section-label">Accès</div>
       <div class="section-title">Comment nous rejoindre</div>
@@ -949,7 +952,6 @@
 
     <div class="divider"><span class="divider-icon">✦</span></div>
 
-    <!-- RSVP -->
     <div class="rsvp-section fade-in-up">
       <div class="rsvp-title">RSVP</div>
       <div class="rsvp-subtitle">Confirmer votre présence avant le 1er Septembre</div>
@@ -967,18 +969,15 @@
         <input type="number" class="rsvp-input" id="rsvp-nb" placeholder="Nombre de personnes" min="1" max="10" style="display:none">
         <input type="text" class="rsvp-input" id="rsvp-message" placeholder="Un message pour les mariés (optionnel)">
         <div id="rsvp-spinner"></div>
-        <button class="rsvp-btn" onclick="submitRSVP()">
-          Confirmer ma présence
-        </button>
+        <button class="rsvp-btn" onclick="submitRSVP()">Confirmer ma présence</button>
       </div>
 
       <div class="rsvp-success" id="rsvpSuccess">
-        <span class="check">💌</span>
+        <span class="check">🌿</span>
         <p>Merci ! Votre réponse a été enregistrée.<br>Nous avons hâte de vous retrouver.</p>
       </div>
     </div>
 
-    <!-- Footer -->
     <div class="inv-footer">
       <div class="footer-names">Yasmine & Karim</div>
       <div class="footer-sub">18 · X · 2025 — Alger</div>
@@ -988,24 +987,77 @@
 </div>
 
 <script>
-// ── PARTICULES ──
+// ── FEUILLES TOMBANTES ──
 const scene = document.getElementById('scene');
-for (let i = 0; i < 28; i++) {
-  const p = document.createElement('div');
-  p.className = 'particle';
-  p.style.cssText = `
+const leafEmojis = ['🍂', '🍁', '🍃', '🌿'];
+for (let i = 0; i < 18; i++) {
+  const l = document.createElement('div');
+  l.className = 'leaf';
+  l.textContent = leafEmojis[Math.floor(Math.random() * leafEmojis.length)];
+  l.style.cssText = `
     left: ${Math.random()*100}%;
-    width: ${Math.random()*2+1}px;
-    height: ${Math.random()*2+1}px;
-    animation-duration: ${8+Math.random()*12}s;
-    animation-delay: ${Math.random()*10}s;
+    font-size: ${9 + Math.random()*8}px;
+    animation-duration: ${14 + Math.random()*16}s;
+    animation-delay: ${Math.random()*18}s;
     opacity: 0;
   `;
-  scene.appendChild(p);
+  scene.appendChild(l);
 }
 
-// ── ÉTAT D'OUVERTURE ──
+// ── ÉTAT ──
 let isOpened = false;
+
+// ── OISEAUX SVG ──
+function createBird(x, y, size, delay, drift) {
+  const overlay = document.getElementById('birds-overlay');
+  const div = document.createElement('div');
+  div.className = 'bird-svg';
+
+  // Silhouette d'oiseau en vol (deux ailes courbes)
+  const wing = Math.random() > 0.5 ? 0.8 : 1.2; // variante d'ailes ouvertes
+  div.innerHTML = `<svg viewBox="0 0 40 20" xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size*0.5}">
+    <path d="M20 10 Q10 ${4*wing} 2 8 Q10 10 20 10 Q30 10 38 8 Q30 ${4*wing} 20 10Z"
+      fill="none" stroke="rgba(181,201,163,0.75)" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>`;
+
+  div.style.cssText = `
+    left: ${x}%;
+    top: ${y}%;
+    --drift: ${drift}px;
+    animation-duration: ${1.8 + Math.random() * 1.2}s;
+    animation-delay: ${delay}s;
+    opacity: 0;
+  `;
+  overlay.appendChild(div);
+  return div;
+}
+
+function launchBirds() {
+  document.body.classList.add('birds-flying');
+  const overlay = document.getElementById('birds-overlay');
+  overlay.innerHTML = ''; // reset
+
+  // Créer une nuée de 18-24 oiseaux
+  const count = 18 + Math.floor(Math.random() * 8);
+  for (let i = 0; i < count; i++) {
+    const x = 20 + Math.random() * 60;  // centré horizontalement
+    const y = 35 + Math.random() * 35;   // zone centrale de l'écran
+    const size = 18 + Math.random() * 28;
+    const delay = Math.random() * 0.9;
+    const drift = (Math.random() - 0.5) * 120;
+    createBird(x, y, size, delay, drift);
+  }
+
+  // Cacher les oiseaux et révéler le faire-part
+  setTimeout(() => {
+    document.body.classList.remove('birds-flying');
+    setTimeout(() => {
+      document.body.classList.add('card-out');
+      document.getElementById('invitation').scrollTop = 0;
+      overlay.innerHTML = '';
+    }, 400);
+  }, 2200);
+}
 
 function openEnvelope() {
   if (isOpened) return;
@@ -1013,11 +1065,10 @@ function openEnvelope() {
 
   document.body.classList.add('opened');
 
-  // Ouvrir rabat → délai → sortir carton
+  // Après l'ouverture du rabat → lancer les oiseaux → puis révéler le faire-part
   setTimeout(() => {
-    document.body.classList.add('card-out');
-    document.getElementById('invitation').scrollTop = 0;
-  }, 950);
+    launchBirds();
+  }, 900);
 }
 
 function closeInvitation() {
@@ -1028,13 +1079,12 @@ function closeInvitation() {
   }, 900);
 }
 
-// ── RSVP NOMBRE ──
+// ── RSVP ──
 document.getElementById('rsvp-presence').addEventListener('change', function() {
   const nb = document.getElementById('rsvp-nb');
   nb.style.display = (this.value === 'famille') ? 'block' : 'none';
 });
 
-// ── RSVP SUBMIT ──
 async function submitRSVP() {
   const name     = document.getElementById('rsvp-name').value.trim();
   const phone    = document.getElementById('rsvp-phone').value.trim();
@@ -1042,40 +1092,27 @@ async function submitRSVP() {
   const nb       = document.getElementById('rsvp-nb').value;
   const message  = document.getElementById('rsvp-message').value.trim();
 
-  if (!name || !presence) {
-    shakeForm();
-    return;
-  }
+  if (!name || !presence) { shakeForm(); return; }
 
-  // Afficher spinner
   document.querySelector('.rsvp-btn').style.display = 'none';
   document.getElementById('rsvp-spinner').style.display = 'block';
 
-  // ── GOOGLE SHEETS ──
-  // Remplacez VOTRE_URL_SCRIPT par l'URL de votre Google Apps Script (voir instructions ci-dessous)
   const GOOGLE_SCRIPT_URL = 'VOTRE_URL_SCRIPT_ICI';
-
   const data = {
     timestamp: new Date().toLocaleString('fr-FR'),
-    name, phone, presence,
-    nombre: nb || '1',
-    message
+    name, phone, presence, nombre: nb || '1', message
   };
 
   try {
     if (GOOGLE_SCRIPT_URL !== 'VOTRE_URL_SCRIPT_ICI') {
       await fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
+        method: 'POST', mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
     }
     showSuccess();
-  } catch (e) {
-    // Même en cas d'erreur réseau (no-cors), considérer comme succès
-    showSuccess();
-  }
+  } catch (e) { showSuccess(); }
 }
 
 function showSuccess() {
@@ -1086,7 +1123,6 @@ function showSuccess() {
 
 function shakeForm() {
   const form = document.getElementById('rsvpForm');
-  form.style.animation = 'none';
   form.style.transform = 'translateX(-6px)';
   setTimeout(() => { form.style.transform = 'translateX(6px)'; }, 60);
   setTimeout(() => { form.style.transform = 'translateX(-4px)'; }, 120);
@@ -1094,32 +1130,20 @@ function shakeForm() {
 }
 </script>
 
-<!-- ══════════════════════════════════════════════════════════════
-  INSTRUCTIONS GOOGLE SHEETS (à lire puis supprimer)
-  ══════════════════════════════════════════════════════════════
-  1. Allez sur https://sheets.google.com → Créez un nouveau Sheet
-     avec ces colonnes en ligne 1 :
+<!--
+  INSTRUCTIONS GOOGLE SHEETS
+  1. https://sheets.google.com → nouveau Sheet, colonnes :
      Horodatage | Nom | Téléphone | Présence | Nombre | Message
-
-  2. Dans le Sheet → Extensions → Apps Script → Copiez ce code :
-
-  function doPost(e) {
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    var data  = JSON.parse(e.postData.contents);
-    sheet.appendRow([
-      data.timestamp, data.name, data.phone,
-      data.presence,  data.nombre, data.message
-    ]);
-    return ContentService.createTextOutput('OK');
-  }
-
-  3. Déployez → Nouvelle déploiement → Type : Application Web
-     → Qui a accès : Tout le monde → Déployer
-     → Copiez l'URL fournie
-
-  4. Remplacez 'VOTRE_URL_SCRIPT_ICI' dans le code JS ci-dessus
-     par cette URL.
-════════════════════════════════════════════════════════════════ -->
+  2. Extensions → Apps Script → collez :
+     function doPost(e) {
+       var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+       var data  = JSON.parse(e.postData.contents);
+       sheet.appendRow([data.timestamp, data.name, data.phone, data.presence, data.nombre, data.message]);
+       return ContentService.createTextOutput('OK');
+     }
+  3. Déployez → Nouvelle déploiement → Application Web → Tout le monde
+  4. Remplacez 'VOTRE_URL_SCRIPT_ICI' par l'URL fournie.
+-->
 
 </body>
 </html>
