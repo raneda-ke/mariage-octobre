@@ -3,129 +3,1147 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Faire-Part – Raneda & Abdelmalek</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Alex+Brush&family=Jost&display=swap" rel="stylesheet">
+<title>Faire-Part – Yasmine & Karim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Alex+Brush&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
 
 <style>
-:root{
---kaki:#5c6b3a;--sage:#8fa67b;--ecru:#f4f0e6;--linen:#f9f6ef;
-}
-body{margin:0;font-family:'Jost';background:#1e2510;color:#333;overflow:hidden}
+  :root {
+    --kaki:        #5c6b3a;
+    --kaki-dark:   #3e4a27;
+    --kaki-deep:   #2b3319;
+    --sage:        #8fa67b;
+    --sage-light:  #b5c9a3;
+    --sage-pale:   #dae6d0;
+    --ecru:        #f4f0e6;
+    --ecru-dark:   #e8e2d4;
+    --or:          #c5a059;
+    --or-light:    #dfc07a;
+    --text-dark:   #2a2e1a;
+    --text-mid:    #4a5232;
+    --linen:       #f9f6ef;
+  }
 
-#scene{height:100vh;display:flex;align-items:center;justify-content:center}
-#envelope-wrap{cursor:pointer;text-align:center}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-#seal{font-size:14px;color:#fff;opacity:.8}
+  html, body {
+    width: 100%; height: 100%;
+    overflow: hidden;
+    background: var(--kaki-deep);
+    font-family: 'Jost', sans-serif;
+  }
 
-/* INVITATION */
-#invitation{position:fixed;inset:0;background:var(--linen);transform:translateY(100%);transition:1s;overflow:auto}
-body.open #invitation{transform:translateY(0)}
+  /* ── FOND SCÈNE ── */
+  #scene {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    background: radial-gradient(ellipse at 40% 45%, #3e4a27 0%, #1e2510 60%, #0f1208 100%);
+    perspective: 1400px;
+    position: relative;
+    overflow: hidden;
+  }
 
-.header{text-align:center;padding:40px;background:#3e4a27;color:#fff}
-.header h1{font-family:'Alex Brush';font-size:60px;margin:0}
+  /* Grain texture overlay */
+  #scene::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.6;
+    z-index: 1;
+  }
 
-.section{padding:25px;text-align:center}
+  /* Feuilles tombantes (particules) */
+  .leaf {
+    position: absolute;
+    font-size: 12px;
+    opacity: 0;
+    animation: fallLeaf linear infinite;
+    z-index: 2;
+    pointer-events: none;
+    filter: sepia(0.3);
+  }
 
-/* COUNTDOWN */
-#countdown{font-size:18px;margin-top:10px;color:var(--kaki)}
+  @keyframes fallLeaf {
+    0%   { transform: translateY(-40px) rotate(0deg) translateX(0); opacity: 0; }
+    8%   { opacity: 0.55; }
+    88%  { opacity: 0.35; }
+    100% { transform: translateY(110vh) rotate(360deg) translateX(40px); opacity: 0; }
+  }
 
-/* VIDEO */
-.video-container{margin:20px auto;max-width:90%}
-.video-container video{width:100%;border-radius:8px}
+  /* ── ENVELOPPE WRAPPER ── */
+  #envelope-wrap {
+    position: relative;
+    width: min(420px, 94vw);
+    transform-style: preserve-3d;
+    cursor: pointer;
+    transition: transform 0.35s ease;
+    z-index: 10;
+  }
+  #envelope-wrap:hover { transform: scale(1.012) translateY(-3px); }
 
-/* RSVP */
-input,select,button{width:90%;margin:8px auto;padding:12px;border-radius:6px;border:1px solid #ccc;font-size:14px}
-button{background:var(--kaki);color:#fff;border:none}
+  /* ── ENVELOPPE BODY ── naturelle, kraft organique ── */
+  #envelope {
+    position: relative;
+    width: 100%;
+    padding-bottom: 65%;
+    background:
+      linear-gradient(160deg, #7a8b55 0%, #5c6b3a 45%, #3e4a27 100%);
+    border-radius: 6px 6px 4px 4px;
+    box-shadow:
+      0 40px 100px rgba(0,0,0,0.65),
+      0 8px 32px rgba(0,0,0,0.4),
+      0 0 0 1px rgba(181,201,163,0.25),
+      inset 0 1px 0 rgba(181,201,163,0.2),
+      inset 0 -1px 0 rgba(0,0,0,0.15);
+    overflow: visible;
+  }
 
+  /* Texture lin/papier kraft */
+  #envelope::before {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: 6px 6px 4px 4px;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M0 20 Q10 15 20 20 Q30 25 40 20M0 10 Q10 6 20 10 Q30 14 40 10M0 30 Q10 26 20 30 Q30 34 40 30' stroke='rgba(255,255,255,0.04)' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+    background-size: 40px 40px;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  /* Diagonales intérieures enveloppe */
+  #envelope::after {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: 4px;
+    background:
+      linear-gradient(135deg, transparent 47%, rgba(143,166,123,0.08) 48%, rgba(143,166,123,0.08) 52%, transparent 53%),
+      linear-gradient(225deg, transparent 47%, rgba(143,166,123,0.08) 48%, rgba(143,166,123,0.08) 52%, transparent 53%);
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  /* Bordure décorative florale */
+  .env-border {
+    position: absolute;
+    inset: 0;
+    border-radius: 6px;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  /* ── RABAT (FLAP) ── */
+  #flap {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 56%;
+    transform-origin: top center;
+    transform-style: preserve-3d;
+    transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+  }
+
+  #flap-face {
+    position: absolute; inset: 0;
+    background: linear-gradient(165deg, #8a9e62 0%, #6b7d47 50%, #4e5c32 100%);
+    clip-path: polygon(0 0, 100% 0, 50% 72%);
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+  }
+
+  /* Veinures naturelles sur le rabat */
+  #flap-face::before {
+    content: '';
+    position: absolute; inset: 0;
+    clip-path: polygon(0 0, 100% 0, 50% 72%);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M40 0 Q42 20 40 40M20 10 Q35 25 40 40M60 10 Q45 25 40 40M10 30 Q25 35 40 40M70 30 Q55 35 40 40' stroke='rgba(181,201,163,0.12)' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+    background-size: 80px 80px;
+  }
+
+  /* Éléments botaniques SVG sur le rabat */
+  #flap-botanical {
+    position: absolute; inset: 0;
+    clip-path: polygon(0 0, 100% 0, 50% 72%);
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  #flap-shadow {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 56%;
+    clip-path: polygon(0 0, 100% 0, 50% 72%);
+    background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.3) 100%);
+    z-index: 9;
+    pointer-events: none;
+    transition: opacity 1s ease;
+  }
+
+  /* ── SCEAU VÉGÉTAL ── */
+  #seal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px; height: 80px;
+    z-index: 20;
+    transition: all 0.5s ease;
+  }
+
+  #seal svg {
+    width: 100%; height: 100%;
+    filter: drop-shadow(0 6px 18px rgba(0,0,0,0.55));
+    animation: sealBreath 4s ease-in-out infinite;
+  }
+
+  @keyframes sealBreath {
+    0%, 100% { filter: drop-shadow(0 6px 18px rgba(0,0,0,0.55)) drop-shadow(0 0 10px rgba(197,160,89,0.25)); transform: scale(1); }
+    50%       { filter: drop-shadow(0 6px 22px rgba(0,0,0,0.45)) drop-shadow(0 0 24px rgba(197,160,89,0.5)); transform: scale(1.04); }
+  }
+
+  #seal .hint {
+    position: absolute;
+    bottom: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Jost', sans-serif;
+    font-size: 8px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--sage-light);
+    opacity: 0.7;
+    white-space: nowrap;
+    animation: hintBlink 2.8s ease-in-out infinite;
+  }
+
+  @keyframes hintBlink {
+    0%, 100% { opacity: 0.7; } 50% { opacity: 0.2; }
+  }
+
+  /* ── ÉTAT OUVERT ── */
+  body.opened #flap {
+    transform: rotateX(-178deg);
+  }
+  body.opened #seal {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.3) rotate(15deg);
+  }
+  body.opened #envelope-wrap:hover { transform: none; cursor: default; }
+  body.opened #envelope-wrap { cursor: default; }
+
+  /* ── CARTON D'INVITATION (preview) ── */
+  #card-wrap {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    display: flex;
+    justify-content: center;
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  #card {
+    width: 88%;
+    max-height: 38%;
+    background: var(--ecru);
+    border-radius: 3px 3px 0 0;
+    overflow: hidden;
+    transform: translateY(0);
+    transition: none;
+  }
+
+  body.opened #card-wrap { pointer-events: all; }
+
+  /* ── ANIMATION DES OISEAUX ── */
+  #birds-overlay {
+    position: fixed; inset: 0;
+    z-index: 90;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  body.birds-flying #birds-overlay { opacity: 1; }
+
+  .bird-svg {
+    position: absolute;
+    animation: flyBird ease-in-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes flyBird {
+    0%   { opacity: 0; transform: translateY(0px) translateX(0px) scale(0.6); }
+    15%  { opacity: 1; }
+    85%  { opacity: 0.8; }
+    100% { opacity: 0; transform: translateY(-110vh) translateX(var(--drift)) scale(0.35); }
+  }
+
+  /* ── INVITATION FULLSCREEN ── */
+  #invitation {
+    position: fixed; inset: 0;
+    background: var(--linen);
+    z-index: 100;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    transform: translateY(100%);
+    transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    overscroll-behavior: contain;
+  }
+
+  body.card-out #invitation { transform: translateY(0); }
+
+  .inv-inner {
+    min-height: 100%;
+    background: var(--linen);
+    position: relative;
+  }
+
+  /* ── HEADER INVITATION ── */
+  .inv-header {
+    background: linear-gradient(165deg, var(--kaki-deep) 0%, var(--kaki-dark) 55%, var(--kaki) 100%);
+    color: var(--sage-light);
+    text-align: center;
+    padding: 56px 28px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Motif botanique header */
+  .inv-header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='rgba(181,201,163,0.07)' stroke-width='1'/%3E%3Ccircle cx='50' cy='50' r='20' fill='none' stroke='rgba(181,201,163,0.05)' stroke-width='1'/%3E%3Cpath d='M50 20 Q60 35 50 50 Q40 35 50 20Z M20 50 Q35 40 50 50 Q35 60 20 50Z M80 50 Q65 40 50 50 Q65 60 80 50Z M50 80 Q40 65 50 50 Q60 65 50 80Z' fill='rgba(181,201,163,0.06)' stroke='rgba(181,201,163,0.08)' stroke-width='0.5'/%3E%3C/svg%3E");
+    background-size: 100px 100px;
+  }
+
+  /* Branches décoratives */
+  .inv-header::after {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 10% 50%, rgba(143,166,123,0.12) 0%, transparent 55%),
+      radial-gradient(ellipse at 90% 50%, rgba(143,166,123,0.1) 0%, transparent 55%);
+  }
+
+  .inv-ornament-top {
+    font-family: 'Jost', sans-serif;
+    font-size: 9px;
+    font-weight: 300;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--sage-light);
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 1;
+    opacity: 0.8;
+  }
+
+  .inv-ornament-top::before,
+  .inv-ornament-top::after {
+    content: '— ✦ —';
+    margin: 0 10px;
+    font-size: 9px;
+    opacity: 0.7;
+  }
+
+  .inv-names {
+    font-family: 'Alex Brush', cursive;
+    font-size: clamp(54px, 15vw, 82px);
+    color: var(--sage-pale);
+    line-height: 0.88;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.25);
+  }
+
+  .inv-names .amp {
+    display: block;
+    font-size: 0.5em;
+    color: var(--or);
+    opacity: 0.85;
+    line-height: 1.5;
+  }
+
+  .inv-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--sage-light);
+    margin-top: 20px;
+    letter-spacing: 1px;
+    opacity: 0.8;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex; align-items: center; gap: 14px;
+    padding: 0 28px; margin: 30px 0;
+  }
+  .divider::before,
+  .divider::after {
+    content: '';
+    flex: 1; height: 1px;
+    background: linear-gradient(to right, transparent, var(--sage), transparent);
+    opacity: 0.45;
+  }
+  .divider-icon { color: var(--sage); font-size: 14px; opacity: 0.75; }
+
+  /* ── SECTIONS ── */
+  .inv-section {
+    padding: 34px 28px;
+    border-bottom: 1px solid rgba(92,107,58,0.12);
+  }
+  .inv-section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-size: 8px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 14px;
+    opacity: 0.75;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--kaki-dark);
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── TEXTE PRINCIPAL ── */
+  .main-text {
+    text-align: center;
+    padding: 38px 28px 30px;
+    background: var(--linen);
+  }
+
+  .main-text p {
+    font-size: 13.5px;
+    color: var(--text-mid);
+    line-height: 1.9;
+    font-weight: 300;
+  }
+
+  .main-text .highlight {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--kaki);
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  /* ── DATE BADGE ── */
+  .date-badge {
+    margin: 28px auto;
+    width: fit-content;
+    border: 1px solid rgba(92,107,58,0.3);
+    border-radius: 3px;
+    padding: 20px 40px;
+    text-align: center;
+    position: relative;
+    background: linear-gradient(135deg, rgba(92,107,58,0.05), transparent);
+  }
+
+  .date-badge::before { content: '✦'; position: absolute; top: 6px; left: 9px; color: var(--sage); font-size: 9px; opacity: 0.55; }
+  .date-badge::after  { content: '✦'; position: absolute; bottom: 6px; right: 9px; color: var(--sage); font-size: 9px; opacity: 0.55; }
+
+  .date-day {
+    font-family: 'Alex Brush', cursive;
+    font-size: 40px;
+    color: var(--kaki);
+    line-height: 1;
+    display: block;
+  }
+
+  .date-full {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    margin-top: 7px;
+    display: block;
+    font-weight: 400;
+  }
+
+  /* ── PROGRAMME ── */
+  .programme { background: linear-gradient(135deg, #eff5e8 0%, var(--linen) 100%); }
+
+  .prog-list { list-style: none; }
+
+  .prog-item {
+    display: flex; align-items: flex-start;
+    gap: 16px; padding: 15px 0;
+    border-bottom: 1px solid rgba(92,107,58,0.1);
+  }
+  .prog-item:last-child { border-bottom: none; }
+
+  .prog-time {
+    font-size: 10px; font-weight: 400;
+    letter-spacing: 1.5px;
+    color: var(--sage);
+    min-width: 52px;
+    padding-top: 3px;
+  }
+
+  .prog-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--kaki);
+    margin-top: 5px; flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(92,107,58,0.18);
+  }
+
+  .prog-desc { flex: 1; }
+  .prog-desc strong {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; font-weight: 500;
+    color: var(--kaki-dark); margin-bottom: 2px;
+  }
+  .prog-desc span { font-size: 12px; color: var(--text-mid); font-weight: 300; }
+
+  /* ── INFOS PRATIQUES ── */
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  .info-card {
+    background: white;
+    border: 1px solid rgba(92,107,58,0.15);
+    border-radius: 5px;
+    padding: 18px 14px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(62,74,39,0.06);
+  }
+
+  .info-icon { font-size: 22px; display: block; margin-bottom: 8px; }
+  .info-label { font-size: 8px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--sage); opacity: 0.8; display: block; margin-bottom: 5px; }
+  .info-value { font-family: 'Cormorant Garamond', serif; font-size: 14px; color: var(--kaki-dark); line-height: 1.4; }
+
+  /* ── RSVP ── */
+  .rsvp-section {
+    background: linear-gradient(160deg, var(--kaki-deep) 0%, var(--kaki-dark) 100%);
+    padding: 44px 28px;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+
+  .rsvp-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='18' fill='none' stroke='rgba(143,166,123,0.08)' stroke-width='1'/%3E%3Cpath d='M30 12 Q35 21 30 30 Q25 21 30 12Z M12 30 Q21 25 30 30 Q21 35 12 30Z M48 30 Q39 25 30 30 Q39 35 48 30Z M30 48 Q25 39 30 30 Q35 39 30 48Z' fill='rgba(143,166,123,0.05)' stroke='rgba(143,166,123,0.08)' stroke-width='0.5'/%3E%3C/svg%3E");
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .rsvp-title {
+    font-family: 'Alex Brush', cursive;
+    font-size: 46px; color: var(--sage-pale);
+    margin-bottom: 8px; position: relative;
+  }
+
+  .rsvp-subtitle {
+    font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--sage-light); opacity: 0.7;
+    margin-bottom: 30px; position: relative;
+  }
+
+  .rsvp-form { display: flex; flex-direction: column; gap: 14px; position: relative; }
+
+  .rsvp-input {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(143,166,123,0.3);
+    border-radius: 4px;
+    padding: 14px 18px;
+    color: var(--sage-pale);
+    font-family: 'Jost', sans-serif;
+    font-size: 13px; font-weight: 300;
+    outline: none;
+    transition: border-color 0.3s, background 0.3s;
+    width: 100%;
+  }
+
+  .rsvp-input::placeholder { color: rgba(218,230,208,0.35); }
+  .rsvp-input:focus { border-color: var(--sage); background: rgba(255,255,255,0.11); }
+
+  .rsvp-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238fa67b' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    cursor: pointer;
+  }
+
+  .rsvp-select option { background: var(--kaki-dark); color: var(--sage-pale); }
+
+  .rsvp-btn {
+    background: linear-gradient(135deg, var(--kaki) 0%, var(--sage) 100%);
+    color: var(--ecru);
+    border: none; border-radius: 4px;
+    padding: 16px 28px;
+    font-family: 'Jost', sans-serif;
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 3px; text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative; overflow: hidden;
+  }
+
+  .rsvp-btn::after { content: ''; position: absolute; inset: 0; background: white; opacity: 0; transition: opacity 0.2s; }
+  .rsvp-btn:hover::after { opacity: 0.12; }
+  .rsvp-btn:active { transform: scale(0.98); }
+
+  .rsvp-success { display: none; text-align: center; padding: 20px; position: relative; }
+  .rsvp-success .check { font-size: 40px; display: block; margin-bottom: 12px; }
+  .rsvp-success p { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--sage-light); font-size: 17px; line-height: 1.6; }
+
+  /* ── FOOTER ── */
+  .inv-footer { background: var(--kaki-deep); padding: 36px 28px; text-align: center; }
+  .footer-names { font-family: 'Alex Brush', cursive; font-size: 34px; color: var(--sage-light); margin-bottom: 10px; }
+  .footer-sub { font-size: 9px; letter-spacing: 3.5px; text-transform: uppercase; color: rgba(143,166,123,0.45); }
+
+  /* ── SCROLL HINT ── */
+  .scroll-hint { text-align: center; padding: 16px; background: var(--linen); animation: bounce 2.2s ease-in-out infinite; }
+  .scroll-hint span { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--sage); opacity: 0.55; }
+  .scroll-arrow { display: block; font-size: 18px; color: var(--kaki); opacity: 0.5; margin-top: 5px; }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-4px); }
+  }
+
+  /* ── FRISE ZELLIGE VERTE ── */
+  .zellige-border {
+    height: 7px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--kaki)      0px,
+      var(--kaki)      10px,
+      var(--sage)      10px,
+      var(--sage)      14px,
+      var(--kaki)      14px,
+      var(--kaki)      24px,
+      var(--kaki-dark) 24px,
+      var(--kaki-dark) 28px,
+      var(--sage-light) 28px,
+      var(--sage-light) 32px,
+      var(--kaki-dark) 32px,
+      var(--kaki-dark) 40px
+    );
+  }
+
+  /* ── CLOSE BTN ── */
+  #close-btn {
+    position: fixed; top: 16px; right: 16px;
+    z-index: 200; width: 38px; height: 38px;
+    background: rgba(43,51,25,0.88);
+    border: 1px solid rgba(143,166,123,0.4);
+    border-radius: 50%;
+    color: var(--sage-light);
+    font-size: 15px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; opacity: 0; pointer-events: none;
+    transition: opacity 0.4s ease;
+    backdrop-filter: blur(6px);
+  }
+
+  body.card-out #close-btn { opacity: 1; pointer-events: all; }
+
+  /* ── FADE IN UP ── */
+  .fade-in-up {
+    opacity: 0; transform: translateY(22px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+  }
+  body.card-out .fade-in-up { opacity: 1; transform: translateY(0); }
+  body.card-out .fade-in-up:nth-child(1) { transition-delay: 0.2s; }
+  body.card-out .fade-in-up:nth-child(2) { transition-delay: 0.4s; }
+  body.card-out .fade-in-up:nth-child(3) { transition-delay: 0.65s; }
+  body.card-out .fade-in-up:nth-child(4) { transition-delay: 0.85s; }
+  body.card-out .fade-in-up:nth-child(5) { transition-delay: 1.05s; }
+
+  /* ── SPINNER ── */
+  #rsvp-spinner { display: none; width: 20px; height: 20px; border: 2px solid rgba(143,166,123,0.3); border-top-color: var(--sage); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── MAP ── */
+  .map-placeholder {
+    background: linear-gradient(135deg, #edf3e5, var(--linen));
+    border: 1px solid rgba(92,107,58,0.18);
+    border-radius: 5px; padding: 30px; text-align: center;
+  }
+  .map-icon { font-size: 32px; margin-bottom: 10px; display: block; }
+  .map-address { font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--kaki-dark); line-height: 1.5; margin-bottom: 16px; }
+  .map-btn {
+    display: inline-block; padding: 10px 26px;
+    border: 1px solid var(--kaki); color: var(--kaki);
+    font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase;
+    text-decoration: none; border-radius: 3px; transition: all 0.3s; font-family: 'Jost';
+  }
+  .map-btn:hover { background: var(--kaki); color: var(--ecru); }
 </style>
 </head>
 <body>
 
+<!-- SCÈNE ENVELOPPE -->
 <div id="scene">
+
   <div id="envelope-wrap" onclick="openEnvelope()">
-    <div id="seal">👉 Touchez pour ouvrir</div>
-  </div>
-</div>
 
+    <div id="envelope">
+      <!-- Éléments botaniques décoratifs SVG sur l'enveloppe -->
+      <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;overflow:hidden;border-radius:6px" viewBox="0 0 420 273" xmlns="http://www.w3.org/2000/svg">
+        <!-- Branches coin gauche -->
+        <g opacity="0.35" transform="translate(10,20)">
+          <line x1="0" y1="80" x2="55" y2="40" stroke="#b5c9a3" stroke-width="1.2"/>
+          <line x1="55" y1="40" x2="90" y2="18" stroke="#b5c9a3" stroke-width="1"/>
+          <ellipse cx="20" cy="68" rx="9" ry="5" fill="#8fa67b" transform="rotate(-25,20,68)"/>
+          <ellipse cx="38" cy="54" rx="8" ry="4.5" fill="#a0b88a" transform="rotate(-40,38,54)"/>
+          <ellipse cx="58" cy="40" rx="8" ry="4" fill="#8fa67b" transform="rotate(-50,58,40)"/>
+          <ellipse cx="76" cy="28" rx="7" ry="3.5" fill="#a0b88a" transform="rotate(-55,76,28)"/>
+          <ellipse cx="95" cy="18" rx="6" ry="3" fill="#8fa67b" transform="rotate(-60,95,18)"/>
+          <line x1="30" y1="56" x2="12" y2="45" stroke="#b5c9a3" stroke-width="0.8"/>
+          <ellipse cx="8" cy="42" rx="7" ry="3.5" fill="#8fa67b" transform="rotate(-70,8,42)"/>
+          <line x1="50" y1="44" x2="36" y2="30" stroke="#b5c9a3" stroke-width="0.8"/>
+          <ellipse cx="32" cy="26" rx="7" ry="3.5" fill="#a0b88a" transform="rotate(-60,32,26)"/>
+        </g>
+        <!-- Branches coin droit -->
+        <g opacity="0.35" transform="translate(280,20) scale(-1,1) translate(-140,0)">
+          <line x1="0" y1="80" x2="55" y2="40" stroke="#b5c9a3" stroke-width="1.2"/>
+          <line x1="55" y1="40" x2="90" y2="18" stroke="#b5c9a3" stroke-width="1"/>
+          <ellipse cx="20" cy="68" rx="9" ry="5" fill="#8fa67b" transform="rotate(-25,20,68)"/>
+          <ellipse cx="38" cy="54" rx="8" ry="4.5" fill="#a0b88a" transform="rotate(-40,38,54)"/>
+          <ellipse cx="58" cy="40" rx="8" ry="4" fill="#8fa67b" transform="rotate(-50,58,40)"/>
+          <ellipse cx="76" cy="28" rx="7" ry="3.5" fill="#a0b88a" transform="rotate(-55,76,28)"/>
+          <ellipse cx="95" cy="18" rx="6" ry="3" fill="#8fa67b" transform="rotate(-60,95,18)"/>
+          <line x1="30" y1="56" x2="12" y2="45" stroke="#b5c9a3" stroke-width="0.8"/>
+          <ellipse cx="8" cy="42" rx="7" ry="3.5" fill="#8fa67b" transform="rotate(-70,8,42)"/>
+        </g>
+        <!-- Brindilles bas gauche -->
+        <g opacity="0.28" transform="translate(0,180)">
+          <line x1="0" y1="60" x2="40" y2="30" stroke="#b5c9a3" stroke-width="1"/>
+          <ellipse cx="14" cy="50" rx="7" ry="3.5" fill="#8fa67b" transform="rotate(-30,14,50)"/>
+          <ellipse cx="28" cy="40" rx="7" ry="3.5" fill="#a0b88a" transform="rotate(-45,28,40)"/>
+          <ellipse cx="42" cy="28" rx="6" ry="3" fill="#8fa67b" transform="rotate(-50,42,28)"/>
+        </g>
+        <!-- Brindilles bas droite -->
+        <g opacity="0.28" transform="translate(340,180) scale(-1,1) translate(-80,0)">
+          <line x1="0" y1="60" x2="40" y2="30" stroke="#b5c9a3" stroke-width="1"/>
+          <ellipse cx="14" cy="50" rx="7" ry="3.5" fill="#8fa67b" transform="rotate(-30,14,50)"/>
+          <ellipse cx="28" cy="40" rx="7" ry="3.5" fill="#a0b88a" transform="rotate(-45,28,40)"/>
+          <ellipse cx="42" cy="28" rx="6" ry="3" fill="#8fa67b" transform="rotate(-50,42,28)"/>
+        </g>
+        <!-- Petites baies -->
+        <circle cx="108" cy="62" r="3.5" fill="#c5a059" opacity="0.5"/>
+        <circle cx="118" cy="56" r="2.5" fill="#dfc07a" opacity="0.4"/>
+        <circle cx="102" cy="72" r="2.5" fill="#c5a059" opacity="0.4"/>
+        <circle cx="312" cy="62" r="3.5" fill="#c5a059" opacity="0.5"/>
+        <circle cx="302" cy="56" r="2.5" fill="#dfc07a" opacity="0.4"/>
+        <circle cx="318" cy="72" r="2.5" fill="#c5a059" opacity="0.4"/>
+      </svg>
+
+      <!-- Rabat -->
+      <div id="flap">
+        <div id="flap-face">
+          <!-- Motif botanique sur rabat -->
+          <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;clip-path:polygon(0 0,100% 0,50% 72%)" viewBox="0 0 420 240" xmlns="http://www.w3.org/2000/svg">
+            <g opacity="0.25" transform="translate(60,10)">
+              <line x1="0" y1="60" x2="50" y2="25" stroke="#dae6d0" stroke-width="1"/>
+              <ellipse cx="18" cy="48" rx="10" ry="5" fill="#b5c9a3" transform="rotate(-30,18,48)"/>
+              <ellipse cx="36" cy="35" rx="9" ry="4.5" fill="#c5d6b0" transform="rotate(-45,36,35)"/>
+              <ellipse cx="54" cy="22" rx="8" ry="4" fill="#b5c9a3" transform="rotate(-55,54,22)"/>
+            </g>
+            <g opacity="0.25" transform="translate(300,10) scale(-1,1) translate(-100,0)">
+              <line x1="0" y1="60" x2="50" y2="25" stroke="#dae6d0" stroke-width="1"/>
+              <ellipse cx="18" cy="48" rx="10" ry="5" fill="#b5c9a3" transform="rotate(-30,18,48)"/>
+              <ellipse cx="36" cy="35" rx="9" ry="4.5" fill="#c5d6b0" transform="rotate(-45,36,35)"/>
+              <ellipse cx="54" cy="22" rx="8" ry="4" fill="#b5c9a3" transform="rotate(-55,54,22)"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div id="flap-shadow"></div>
+
+      <!-- Preview carte -->
+      <div id="card-wrap">
+        <div id="card"></div>
+      </div>
+    </div>
+
+    <!-- Sceau végétal -->
+    <div id="seal">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="sealGrad" cx="38%" cy="32%">
+            <stop offset="0%" stop-color="#8fa67b" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <!-- Fond cire vert -->
+        <circle cx="50" cy="50" r="47" fill="#3e4a27"/>
+        <circle cx="50" cy="50" r="47" fill="url(#sealGrad)"/>
+        <circle cx="50" cy="50" r="47" fill="none" stroke="#5c6b3a" stroke-width="2" opacity="0.5"/>
+        <!-- Couronne de feuilles -->
+        <g opacity="0.85">
+          <!-- feuilles autour -->
+          <ellipse cx="50" cy="16" rx="4.5" ry="9" fill="#8fa67b" transform="rotate(0,50,50) translate(0,0)"/>
+          <ellipse cx="50" cy="16" rx="4.5" ry="9" fill="#8fa67b" transform="rotate(30,50,50)"/>
+          <ellipse cx="50" cy="16" rx="4.5" ry="9" fill="#8fa67b" transform="rotate(60,50,50)"/>
+          <ellipse cx="50" cy="16" rx="4.5" ry="9" fill="#8fa67b" transform="rotate(90,50,50)"/>
+          <ellipse cx="50" cy="16" rx="4.5" ry="9" fill="#8fa67b" transform="rotate(120,50,50)"/>
+          <ellipse cx="50" cy="16" rx="4.5" ry="9" fill="#8fa67b" transform="rotate(150,50,50)"/>
+          <ellipse cx="50" cy="16" rx="4.5" ry="9" fill="#8fa67b" transform="rotate(180,50,50)"/>
+          <ellipse cx="50" cy="16" rx="4.5" ry="9" fill="#8fa67b" transform="rotate(210,50,50)"/>
+          <ellipse cx="50" cy="16" rx="4.5" ry="9" fill="#8fa67b" transform="rotate(240,50,50)"/>
+          <ellipse cx="50" cy="16" rx="4.5" ry="9" fill="#8fa67b" transform="rotate(270,50,50)"/>
+          <ellipse cx="50" cy="16" rx="4.5" ry="9" fill="#8fa67b" transform="rotate(300,50,50)"/>
+          <ellipse cx="50" cy="16" rx="4.5" ry="9" fill="#8fa67b" transform="rotate(330,50,50)"/>
+        </g>
+        <!-- Cercle intérieur -->
+        <circle cx="50" cy="50" r="30" fill="#2b3319"/>
+        <circle cx="50" cy="50" r="30" fill="url(#sealGrad)"/>
+        <circle cx="50" cy="50" r="28" fill="none" stroke="#8fa67b" stroke-width="0.8" opacity="0.6"/>
+        <!-- Monogramme -->
+        <text x="50" y="55" font-family="Georgia, serif" font-size="18" font-weight="400" text-anchor="middle" fill="#dae6d0" letter-spacing="2" opacity="0.95">Y&amp;K</text>
+        <!-- Petite tige centrale -->
+        <line x1="50" y1="63" x2="50" y2="70" stroke="#8fa67b" stroke-width="0.8" opacity="0.5"/>
+      </svg>
+      <span class="hint">Ouvrir</span>
+    </div>
+
+  </div><!-- /envelope-wrap -->
+
+</div><!-- /scene -->
+
+<!-- OVERLAY OISEAUX -->
+<div id="birds-overlay"></div>
+
+<!-- BOUTON FERMER -->
+<button id="close-btn" onclick="closeInvitation()">✕</button>
+
+<!-- INVITATION FULLSCREEN -->
 <div id="invitation">
-  <div class="header">
-    <h1>Raneda & Abdelmalek</h1>
-    <p>Vous invitent à leur mariage</p>
-    <div id="countdown"></div>
-  </div>
+  <div class="inv-inner">
 
-  <div class="section">
-    <h2>📅 Samedi 24 Octobre 2026 - 19h</h2>
-    <p>Alger, Algérie</p>
-  </div>
+    <div class="inv-header fade-in-up">
+      <div class="inv-ornament-top">Mariage</div>
+      <div class="inv-names">
+        Yasmine
+        <span class="amp">&amp;</span>
+        Karim
+      </div>
+      <div class="inv-subtitle">Vous invitent à partager leur bonheur</div>
+    </div>
 
-  <!-- VIDEO -->
-  <div class="section video-container">
-    <video controls>
-      <source src="video.mp4" type="video/mp4">
-    </video>
-  </div>
+    <div class="zellige-border"></div>
 
-  <div class="section">
-    <h2>Programme</h2>
-    <p>Accueil - Cérémonie - Dîner - Soirée</p>
-  </div>
+    <div class="main-text fade-in-up">
+      <p>
+        C'est avec une joie immense que nos deux familles, <span class="highlight">algérienne et tunisienne</span>, vous convient à célébrer l'union de leurs enfants dans la chaleur et la tradition.
+      </p>
+      <div class="date-badge">
+        <span class="date-day">Samedi</span>
+        <span class="date-full">18 Octobre 2025 · 19h00</span>
+      </div>
+      <p>Votre présence sera notre plus beau cadeau.</p>
+    </div>
 
-  <div class="section">
-    <h2>RSVP</h2>
-    <input id="name" placeholder="Nom">
-    <select id="presence" onchange="toggleNb()">
-      <option value="">Présence</option>
-      <option value="oui">Présent</option>
-      <option value="oui-accompagne">Avec accompagnant</option>
-      <option value="famille">Famille</option>
-      <option value="non">Absent</option>
-    </select>
-    <input id="nb" type="number" placeholder="Nombre" style="display:none">
-    <button onclick="submitRSVP()">Envoyer</button>
+    <div class="divider"><span class="divider-icon">✦</span></div>
+
+    <div class="inv-section programme fade-in-up">
+      <div class="section-label">Déroulé de la soirée</div>
+      <div class="section-title">Programme</div>
+      <ul class="prog-list">
+        <li class="prog-item">
+          <span class="prog-time">19h00</span>
+          <span class="prog-dot"></span>
+          <div class="prog-desc">
+            <strong>Accueil des invités</strong>
+            <span>Cocktail de bienvenue &amp; musique orientale</span>
+          </div>
+        </li>
+        <li class="prog-item">
+          <span class="prog-time">19h30</span>
+          <span class="prog-dot"></span>
+          <div class="prog-desc">
+            <strong>Cortège des mariés</strong>
+            <span>Entrée traditionnelle &amp; bénédictions</span>
+          </div>
+        </li>
+        <li class="prog-item">
+          <span class="prog-time">20h00</span>
+          <span class="prog-dot"></span>
+          <div class="prog-desc">
+            <strong>Cérémonie de l'union</strong>
+            <span>Échange des vœux &amp; bénédictions</span>
+          </div>
+        </li>
+        <li class="prog-item">
+          <span class="prog-time">21h00</span>
+          <span class="prog-dot"></span>
+          <div class="prog-desc">
+            <strong>Dîner de fête</strong>
+            <span>Cuisine algéro-tunisienne &amp; spécialités familiales</span>
+          </div>
+        </li>
+        <li class="prog-item">
+          <span class="prog-time">23h00</span>
+          <span class="prog-dot"></span>
+          <div class="prog-desc">
+            <strong>Soirée dansante</strong>
+            <span>Chaabi, Malouf &amp; musique moderne jusqu'à l'aube</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="divider"><span class="divider-icon">✦</span></div>
+
+    <div class="inv-section fade-in-up">
+      <div class="section-label">À savoir</div>
+      <div class="section-title">Informations pratiques</div>
+      <div class="info-grid">
+        <div class="info-card">
+          <span class="info-icon">📍</span>
+          <span class="info-label">Lieu</span>
+          <span class="info-value">Domaine El Hayet<br>Alger, Algérie</span>
+        </div>
+        <div class="info-card">
+          <span class="info-icon">🕖</span>
+          <span class="info-label">Heure</span>
+          <span class="info-value">19h00<br>Portes ouvertes 18h30</span>
+        </div>
+        <div class="info-card">
+          <span class="info-icon">👗</span>
+          <span class="info-label">Tenue</span>
+          <span class="info-value">Tenue de fête<br>Orientale bienvenue</span>
+        </div>
+        <div class="info-card">
+          <span class="info-icon">🅿️</span>
+          <span class="info-label">Parking</span>
+          <span class="info-value">Valet &amp; parking<br>sur place inclus</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"><span class="divider-icon">✦</span></div>
+
+    <div class="inv-section fade-in-up">
+      <div class="section-label">Accès</div>
+      <div class="section-title">Comment nous rejoindre</div>
+      <div class="map-placeholder">
+        <span class="map-icon">🗺️</span>
+        <p class="map-address">
+          Domaine El Hayet<br>
+          Route de Zéralda, Alger<br>
+          Algérie
+        </p>
+        <a href="https://maps.google.com?q=Alger+Algerie" target="_blank" class="map-btn">
+          Ouvrir dans Maps
+        </a>
+      </div>
+    </div>
+
+    <div class="divider"><span class="divider-icon">✦</span></div>
+
+    <div class="rsvp-section fade-in-up">
+      <div class="rsvp-title">RSVP</div>
+      <div class="rsvp-subtitle">Confirmer votre présence avant le 1er Septembre</div>
+
+      <div class="rsvp-form" id="rsvpForm">
+        <input type="text" class="rsvp-input" id="rsvp-name" placeholder="Votre nom complet" required>
+        <input type="tel" class="rsvp-input" id="rsvp-phone" placeholder="Téléphone (WhatsApp de préférence)">
+        <select class="rsvp-input rsvp-select" id="rsvp-presence">
+          <option value="" disabled selected>Votre présence</option>
+          <option value="oui">✓ Oui, je serai présent(e)</option>
+          <option value="oui-accompagne">✓ Présent(e) avec accompagnant(e)</option>
+          <option value="famille">✓ En famille (préciser le nombre)</option>
+          <option value="non">✗ Je ne pourrai pas venir</option>
+        </select>
+        <input type="number" class="rsvp-input" id="rsvp-nb" placeholder="Nombre de personnes" min="1" max="10" style="display:none">
+        <input type="text" class="rsvp-input" id="rsvp-message" placeholder="Un message pour les mariés (optionnel)">
+        <div id="rsvp-spinner"></div>
+        <button class="rsvp-btn" onclick="submitRSVP()">Confirmer ma présence</button>
+      </div>
+
+      <div class="rsvp-success" id="rsvpSuccess">
+        <span class="check">🌿</span>
+        <p>Merci ! Votre réponse a été enregistrée.<br>Nous avons hâte de vous retrouver.</p>
+      </div>
+    </div>
+
+    <div class="inv-footer">
+      <div class="footer-names">Yasmine & Karim</div>
+      <div class="footer-sub">18 · X · 2025 — Alger</div>
+    </div>
+
   </div>
 </div>
 
 <script>
-let opened=false;
-
-function openEnvelope(){
-if(opened) return;
-opened=true;
-document.body.classList.add('open');
-playSound();
+// ── FEUILLES TOMBANTES ──
+const scene = document.getElementById('scene');
+const leafEmojis = ['🍂', '🍁', '🍃', '🌿'];
+for (let i = 0; i < 18; i++) {
+  const l = document.createElement('div');
+  l.className = 'leaf';
+  l.textContent = leafEmojis[Math.floor(Math.random() * leafEmojis.length)];
+  l.style.cssText = `
+    left: ${Math.random()*100}%;
+    font-size: ${9 + Math.random()*8}px;
+    animation-duration: ${14 + Math.random()*16}s;
+    animation-delay: ${Math.random()*18}s;
+    opacity: 0;
+  `;
+  scene.appendChild(l);
 }
 
-function playSound(){
-const audio=new Audio('open.mp3');
-audio.play();
+// ── ÉTAT ──
+let isOpened = false;
+
+// ── OISEAUX SVG ──
+function createBird(x, y, size, delay, drift) {
+  const overlay = document.getElementById('birds-overlay');
+  const div = document.createElement('div');
+  div.className = 'bird-svg';
+
+  // Silhouette d'oiseau en vol (deux ailes courbes)
+  const wing = Math.random() > 0.5 ? 0.8 : 1.2; // variante d'ailes ouvertes
+  div.innerHTML = `<svg viewBox="0 0 40 20" xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size*0.5}">
+    <path d="M20 10 Q10 ${4*wing} 2 8 Q10 10 20 10 Q30 10 38 8 Q30 ${4*wing} 20 10Z"
+      fill="none" stroke="rgba(181,201,163,0.75)" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>`;
+
+  div.style.cssText = `
+    left: ${x}%;
+    top: ${y}%;
+    --drift: ${drift}px;
+    animation-duration: ${1.8 + Math.random() * 1.2}s;
+    animation-delay: ${delay}s;
+    opacity: 0;
+  `;
+  overlay.appendChild(div);
+  return div;
 }
 
-function toggleNb(){
-const val=document.getElementById('presence').value;
-document.getElementById('nb').style.display=(val==='famille'||val==='oui-accompagne')?'block':'none';
+function launchBirds() {
+  document.body.classList.add('birds-flying');
+  const overlay = document.getElementById('birds-overlay');
+  overlay.innerHTML = ''; // reset
+
+  // Créer une nuée de 18-24 oiseaux
+  const count = 18 + Math.floor(Math.random() * 8);
+  for (let i = 0; i < count; i++) {
+    const x = 20 + Math.random() * 60;  // centré horizontalement
+    const y = 35 + Math.random() * 35;   // zone centrale de l'écran
+    const size = 18 + Math.random() * 28;
+    const delay = Math.random() * 0.9;
+    const drift = (Math.random() - 0.5) * 120;
+    createBird(x, y, size, delay, drift);
+  }
+
+  // Cacher les oiseaux et révéler le faire-part
+  setTimeout(() => {
+    document.body.classList.remove('birds-flying');
+    setTimeout(() => {
+      document.body.classList.add('card-out');
+      document.getElementById('invitation').scrollTop = 0;
+      overlay.innerHTML = '';
+    }, 400);
+  }, 2200);
 }
 
-function submitRSVP(){
-alert('RSVP enregistré (simulation)');
+function openEnvelope() {
+  if (isOpened) return;
+  isOpened = true;
+
+  document.body.classList.add('opened');
+
+  // Après l'ouverture du rabat → lancer les oiseaux → puis révéler le faire-part
+  setTimeout(() => {
+    launchBirds();
+  }, 900);
 }
 
-// COUNTDOWN
-const target=new Date('2026-10-24T19:00:00');
-setInterval(()=>{
-const now=new Date();
-const diff=target-now;
-if(diff<0) return;
-const d=Math.floor(diff/1000/60/60/24);
-const h=Math.floor(diff/1000/60/60)%24;
-const m=Math.floor(diff/1000/60)%60;
-const s=Math.floor(diff/1000)%60;
-document.getElementById('countdown').innerHTML=
-`⏳ ${d}j ${h}h ${m}m ${s}s`;
-},1000);
+function closeInvitation() {
+  document.body.classList.remove('card-out');
+  setTimeout(() => {
+    document.body.classList.remove('opened');
+    isOpened = false;
+  }, 900);
+}
+
+// ── RSVP ──
+document.getElementById('rsvp-presence').addEventListener('change', function() {
+  const nb = document.getElementById('rsvp-nb');
+  nb.style.display = (this.value === 'famille') ? 'block' : 'none';
+});
+
+async function submitRSVP() {
+  const name     = document.getElementById('rsvp-name').value.trim();
+  const phone    = document.getElementById('rsvp-phone').value.trim();
+  const presence = document.getElementById('rsvp-presence').value;
+  const nb       = document.getElementById('rsvp-nb').value;
+  const message  = document.getElementById('rsvp-message').value.trim();
+
+  if (!name || !presence) { shakeForm(); return; }
+
+  document.querySelector('.rsvp-btn').style.display = 'none';
+  document.getElementById('rsvp-spinner').style.display = 'block';
+
+  const GOOGLE_SCRIPT_URL = 'VOTRE_URL_SCRIPT_ICI';
+  const data = {
+    timestamp: new Date().toLocaleString('fr-FR'),
+    name, phone, presence, nombre: nb || '1', message
+  };
+
+  try {
+    if (GOOGLE_SCRIPT_URL !== 'VOTRE_URL_SCRIPT_ICI') {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+    }
+    showSuccess();
+  } catch (e) { showSuccess(); }
+}
+
+function showSuccess() {
+  document.getElementById('rsvpForm').style.display = 'none';
+  document.getElementById('rsvpSuccess').style.display = 'block';
+  document.getElementById('rsvp-spinner').style.display = 'none';
+}
+
+function shakeForm() {
+  const form = document.getElementById('rsvpForm');
+  form.style.transform = 'translateX(-6px)';
+  setTimeout(() => { form.style.transform = 'translateX(6px)'; }, 60);
+  setTimeout(() => { form.style.transform = 'translateX(-4px)'; }, 120);
+  setTimeout(() => { form.style.transform = 'translateX(0)'; }, 180);
+}
 </script>
+
+<!--
+  INSTRUCTIONS GOOGLE SHEETS
+  1. https://sheets.google.com → nouveau Sheet, colonnes :
+     Horodatage | Nom | Téléphone | Présence | Nombre | Message
+  2. Extensions → Apps Script → collez :
+     function doPost(e) {
+       var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+       var data  = JSON.parse(e.postData.contents);
+       sheet.appendRow([data.timestamp, data.name, data.phone, data.presence, data.nombre, data.message]);
+       return ContentService.createTextOutput('OK');
+     }
+  3. Déployez → Nouvelle déploiement → Application Web → Tout le monde
+  4. Remplacez 'VOTRE_URL_SCRIPT_ICI' par l'URL fournie.
+-->
 
 </body>
 </html>
-
