@@ -708,17 +708,17 @@
     <div class="program" id="program-section">
       <div class="item">
         <div class="icon">🏛️</div>
-        <div class="time">14h00 — Mariage civil</div>
+        <div class="time">14h00 — Cérémonie civil</div>
         <div class="label">à la Mairie de Saint-Priest</div>
       </div>
       <div class="item">
         <div class="icon">📷</div>
-        <div class="time">15h00 — Photos</div>
+        <div class="time">15h00 — Photos & Souvenirs</div>
         <div class="label">au Château de Saint-Priest</div>
       </div>
       <div class="item">
         <div class="icon">🥂</div>
-        <div class="time">À partir de 19h — Réception</div>
+        <div class="time">À partir de 19h — Réception & Soirée</div>
         <div class="label">Le New Carré d'Or<br>146 Rte de Grenoble, 69800 Saint-Priest, France</div>
       </div>
     </div>
@@ -744,7 +744,7 @@
         </div>
 
         <div class="field">
-          <label>Serez-vous présent(e) ?</label>
+          <label>Serez-vous parmi nous pour célébrer cette belle journée ?</label>
           <div class="radio-group">
             <label class="radio-option">
               <input type="radio" name="presence" value="Oui" required> Oui
@@ -756,8 +756,13 @@
         </div>
 
         <div class="field">
-          <label for="adultes_sup">Nombre de personnes adultes vous accompagnant (n'ayant pas reçu de faire-part)</label>
+          <label for="adultes_sup">Combien serez-vous à partager ce moment avec nous?</label>
           <input type="number" id="adultes_sup" name="adultes_sup" min="0" value="0" required>
+        </div>
+
+        <div class="field">
+          <label for="enfants">Nombre d'adultes (plus de 8ans)</label>
+          <input type="number" id="adultes" name="adultes" min="0" value="0" required>
         </div>
 
         <div class="field">
@@ -766,7 +771,7 @@
         </div>
 
         <div class="field">
-          <label for="message">Un petit mot (facultatif)</label>
+          <label for="message">Un petit mot pour les mariés (facultatif)</label>
           <textarea id="message" name="message" rows="3"></textarea>
         </div>
 
