@@ -798,8 +798,9 @@
     if (opened) return;
     opened = true;
 
-    // Tenter de lancer la musique au clic sur l'enveloppe
+    // Lancer la musique au clic sur l'enveloppe en démarrant à 2 secondes
     weddingAudio.volume = 0.5;
+    weddingAudio.currentTime = 2; // Saute les 2 premières secondes vides
     weddingAudio.play().then(() => {
       musicToggle.textContent = '🔊';
     }).catch(e => {
