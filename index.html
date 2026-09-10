@@ -38,7 +38,7 @@
     box-shadow:0 0 60px rgba(0,0,0,0.12);
   }
 
-  /* ---------- ENVELOPE SCENE ---------- */
+  /* ---------- ENVELOPE SCENE (Forme enveloppe classique à rabat triangulaire) ---------- */
   #scene{
     position:fixed;
     inset:0;
@@ -72,8 +72,8 @@
     opacity:.85;
   }
   .envelope{
-    width:230px;
-    height:160px;
+    width:250px;
+    height:175px;
     position:relative;
     cursor:pointer;
     -webkit-tap-highlight-color:transparent;
@@ -121,18 +121,19 @@
     content:"";
     position:absolute;
     bottom:0;
-    width:144px;
+    width:157px;
     height:1.5px;
     background:rgba(122,90,40,.4);
   }
-  .env-body::before{ left:0; transform-origin:0% 100%; transform:rotate(-36.8deg); }
-  .env-body::after{ right:0; transform-origin:100% 100%; transform:rotate(36.8deg); }
+  .env-body::before{ left:0; transform-origin:0% 100%; transform:rotate(-35deg); }
+  .env-body::after{ right:0; transform-origin:100% 100%; transform:rotate(35deg); }
+
   .env-flap{
     position:absolute;
     top:0; left:0; right:0;
-    height:80px;
+    height:100px;
     background:linear-gradient(160deg, #F6EEDD, var(--paper));
-    clip-path:polygon(0 0, 100% 0, 50% 92%);
+    clip-path:polygon(0 0, 100% 0, 50% 100%);
     border-top:1.5px solid var(--gold);
     transform-origin:top center;
     transform-style:preserve-3d;
@@ -145,7 +146,7 @@
   }
   .env-seal-wrap{
     position:absolute;
-    top:36px; left:50%;
+    top:62px; left:50%;
     transform:translate(-50%,0);
     width:56px; height:56px;
     z-index:4;
@@ -188,7 +189,7 @@
   .card-peek{
     position:absolute;
     left:14px; right:14px; top:22px;
-    height:126px;
+    height:136px;
     background:var(--ivory);
     border:1px solid var(--gold);
     border-radius:2px;
@@ -210,7 +211,7 @@
   }
   .envelope.opened .card-peek{
     opacity:1;
-    transform:translateY(-96px) scale(1) rotate(-1.5deg);
+    transform:translateY(-104px) scale(1) rotate(-1.5deg);
     box-shadow:0 18px 32px rgba(74,52,35,.22);
   }
   .envelope.opened .card-peek span{ opacity:1; }
@@ -582,6 +583,11 @@
 </head>
 <body>
 
+<!-- Audio de fond (Musique de mariage douce / piano romantique) -->
+<audio id="wedding-audio" loop preload="auto">
+  <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=wedding-valse-romantic-piano-111520.mp3" type="audio/mpeg">
+</audio>
+
 <div class="phone">
 
   <!-- ===== Envelope opening scene ===== -->
@@ -753,16 +759,22 @@
 </div>
 
 <script>
-  // ---- Envelope opening sequence ----
+  // ---- Envelope opening sequence & Audio ----
   const envelope = document.getElementById('envelope');
   const scene = document.getElementById('scene');
   const invitation = document.getElementById('invitation');
+  const weddingAudio = document.getElementById('wedding-audio');
   let opened = false;
 
   function openEnvelope(evt) {
     if (evt) evt.preventDefault();
     if (opened) return;
     opened = true;
+
+    // Lancer la musique au clic sur l'enveloppe
+    weddingAudio.volume = 0.5;
+    weddingAudio.play().catch(e => console.log("Audio lecture bloquée :", e));
+
     envelope.classList.add('opened');
     setTimeout(() => envelope.classList.add('bursting'), 500);
     setTimeout(() => scene.classList.add('fade-out'), 2000);
@@ -802,9 +814,6 @@
   setInterval(updateCountdown, 1000);
 
   // ---- RSVP submission ----
-  // 1) Crée un Google Sheet, ouvre-le, "Extensions > Apps Script"
-  // 2) Colle le script fourni dans les instructions, puis "Déployer > Nouveau déploiement > Application Web"
-  // 3) Colle ici l'URL obtenue (elle se termine par /exec)
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby9bAXJ3Nt839SputTbjN543O2BhT51xQAwuwAGgsb75gNwVC4Ll6RjDiY37gcGL4sYyg/exec";
 
   const form = document.getElementById('rsvp-form');
