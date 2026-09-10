@@ -38,7 +38,7 @@
     box-shadow:0 0 60px rgba(0,0,0,0.12);
   }
 
-  /* ---------- ENVELOPE SCENE (Forme enveloppe classique à rabat triangulaire) ---------- */
+  /* ---------- ENVELOPE SCENE ---------- */
   #scene{
     position:fixed;
     inset:0;
@@ -116,17 +116,19 @@
     box-shadow:0 14px 30px rgba(74,52,35,.18), inset 0 0 0 4px rgba(251,247,238,.6);
     overflow:hidden;
   }
+  
+  /* Plats latéraux modifiés : partent des coins supérieurs vers le centre sous le sceau */
   .env-body::before,
   .env-body::after{
     content:"";
     position:absolute;
-    bottom:0;
-    width:157px;
+    top:0;
+    width:150px;
     height:1.5px;
     background:rgba(122,90,40,.4);
   }
-  .env-body::before{ left:0; transform-origin:0% 100%; transform:rotate(-35deg); }
-  .env-body::after{ right:0; transform-origin:100% 100%; transform:rotate(35deg); }
+  .env-body::before{ left:0; transform-origin:0% 0%; transform:rotate(38deg); }
+  .env-body::after{ right:0; transform-origin:100% 0%; transform:rotate(-38deg); }
 
   .env-flap{
     position:absolute;
@@ -583,8 +585,9 @@
 </head>
 <body>
 
-<!-- Audio de fond (Musique de mariage douce / piano romantique) -->
+<!-- Audio de fond optimisé et direct -->
 <audio id="wedding-audio" loop preload="auto">
+  <source src="https://actions.google.com/sounds/v1/ambiences/romantic_music.ogg" type="audio/ogg">
   <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=wedding-valse-romantic-piano-111520.mp3" type="audio/mpeg">
 </audio>
 
