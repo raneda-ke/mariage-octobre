@@ -38,6 +38,27 @@
     box-shadow:0 0 60px rgba(0,0,0,0.12);
   }
 
+  /* ---------- AUDIO FLOATING BUTTON ---------- */
+  .music-btn{
+    position:fixed;
+    top:20px;
+    right:20px;
+    z-index:100;
+    background:var(--ivory);
+    border:1px solid var(--gold);
+    border-radius:50%;
+    width:42px;
+    height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    box-shadow:0 4px 12px rgba(74,52,35,0.15);
+    font-size:1.1rem;
+    transition:transform .2s;
+  }
+  .music-btn:active{ transform:scale(0.92); }
+
   /* ---------- ENVELOPE SCENE ---------- */
   #scene{
     position:fixed;
@@ -117,7 +138,7 @@
     overflow:hidden;
   }
   
-  /* Plats latéraux modifiés : partent des coins supérieurs vers le centre sous le sceau */
+  /* Plis latéraux : partent des coins supérieurs vers le centre sous le sceau */
   .env-body::before,
   .env-body::after{
     content:"";
@@ -585,11 +606,14 @@
 </head>
 <body>
 
-<!-- Audio de fond optimisé et direct -->
+<!-- Audio de fond -->
 <audio id="wedding-audio" loop preload="auto">
   <source src="https://actions.google.com/sounds/v1/ambiences/romantic_music.ogg" type="audio/ogg">
   <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=wedding-valse-romantic-piano-111520.mp3" type="audio/mpeg">
 </audio>
+
+<!-- Bouton flottant de musique (pour contourner les blocages navigateurs) -->
+<button class="music-btn" id="music-toggle" title="Activer/ couper la musique">🎵</button>
 
 <div class="phone">
 
@@ -767,6 +791,7 @@
   const scene = document.getElementById('scene');
   const invitation = document.getElementById('invitation');
   const weddingAudio = document.getElementById('wedding-audio');
+  const musicToggle = document.getElementById('music-toggle');
   let opened = false;
 
   function openEnvelope(evt) {
@@ -774,9 +799,14 @@
     if (opened) return;
     opened = true;
 
-    // Lancer la musique au clic sur l'enveloppe
+    // Tenter de lancer la musique au clic sur l'enveloppe
     weddingAudio.volume = 0.5;
-    weddingAudio.play().catch(e => console.log("Audio lecture bloquée :", e));
+    weddingAudio.play().then(() => {
+      musicToggle.textContent = '🔊';
+    }).catch(e => {
+      console.log("Audio bloqué automatiquement, utilisation du bouton requise", e);
+      musicToggle.textContent = '🔇';
+    });
 
     envelope.classList.add('opened');
     setTimeout(() => envelope.classList.add('bursting'), 500);
@@ -789,7 +819,20 @@
   envelope.addEventListener('touchend', openEnvelope, { passive: false });
   envelope.addEventListener('click', openEnvelope);
 
-  // ---- Countdown until the wedding (24/10/2026, 14h - mariage civil) ----
+  // Gestion du bouton de musique manuel (contourne les sécurités mobiles)
+  musicToggle.addEventListener('click', () => {
+    if (weddingAudio.paused) {
+      weddingAudio.volume = 0.5;
+      weddingAudio.play().then(() => {
+        musicToggle.textContent = '🔊';
+      }).catch(err => alert("Impossible de lancer la musique."));
+    } else {
+      weddingAudio.pause();
+      musicToggle.textContent = '🔇';
+    }
+  });
+
+  // ---- Countdown until the wedding (24/10/2026, 14h) ----
   const WEDDING_DATE = new Date('2026-10-24T14:00:00');
   const cdDays = document.getElementById('cd-days');
   const cdHours = document.getElementById('cd-hours');
